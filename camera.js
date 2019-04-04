@@ -17,6 +17,7 @@
 import * as posenet from '@tensorflow-models/posenet';
 import dat from 'dat.gui';
 import Stats from 'stats.js';
+import 'babel-polyfill';
 
 import {drawBoundingBox, drawKeypoints, drawSkeleton} from './demo_util';
 

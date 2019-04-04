@@ -17,6 +17,7 @@
 import * as posenet from '@tensorflow-models/posenet';
 import * as tf from '@tensorflow/tfjs';
 import dat from 'dat.gui';
+import 'babel-polyfill';
 // import * as express from 'express';
 
 // clang-format off

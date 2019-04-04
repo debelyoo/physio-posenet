@@ -1,1 +1,23 @@
 # Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+node_modules
+dist/
+
+**/*/node_modules
+**/*/coverage
+**/*/.cache
+**/*/yarn-error.log
+**/*/yalc.lock
+**/*/.yalc
+
+.rpt2_cache/
+
+*.pyc
