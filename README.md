@@ -18,6 +18,13 @@ The [coco images](http://cocodataset.org/#home) demo shows how to estimate poses
 
 ## Setup
 
+Start the simple HTTP server (to serve local images)
+
+```sh
+cd public
+python3 simple-cors-http-server.py 
+```
+
 Install dependencies and prepare the build directory:
 
 ```sh

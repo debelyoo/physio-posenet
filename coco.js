@@ -68,7 +68,7 @@ const imagesOld = [
   'two_on_bench.jpg',
 ];
 const images = [
-    'woman_dancing_1.jpg'
+    'woman_dancing_1_small.jpg',
 ];
 
 const {partIds, poseChain} = posenet;
@@ -100,9 +100,12 @@ function drawResults(canvas, poses, minPartConfidence, minPoseConfidence) {
 
 const imageBucket =
     'https://storage.googleapis.com/tfjs-models/assets/posenet/';
+const imageServer =
+    'http://localhost:8000/';
 
 async function loadImage(imagePath) {
   const image = new Image();
+  // image.crossOrigin = null;
   const promise = new Promise((resolve, reject) => {
     image.crossOrigin = '';
     image.onload = () => {
@@ -111,7 +114,7 @@ async function loadImage(imagePath) {
   });
 
   // image.src = `${imageBucket}${imagePath}`;
-  image.src = `public/${imagePath}`;
+  image.src = `${imageServer}${imagePath}`;
   return promise;
 }
 
@@ -384,7 +387,8 @@ let guiState;
 function setupGui(net) {
   guiState = {
     outputStride: 16,
-    image: 'woman_dancing_1.jpg',
+    image: 'woman_dancing_1_small.jpg',
+    // image: 'tennis_in_crowd.jpg',
     detectPoseButton: () => {
       testImageAndEstimatePoses(net);
     },
