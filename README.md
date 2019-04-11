@@ -3,4 +3,5 @@ Real-time pose validation for physiotherapy exercises using pre-trained TensorFl
 
 ## Contents
 __frontend__ - the code for the application frontend (Javascript)
+
 __backend__ - the code for the application backend (Python)  
