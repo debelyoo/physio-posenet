@@ -1,6 +1,7 @@
 # PoseNet Demos
 
 ## Contents
+This folder contains demo app to illustrate the use of PoseNet in Javascript.
 
 ### Demo 1: Camera
 
