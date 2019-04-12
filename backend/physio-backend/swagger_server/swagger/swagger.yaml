@@ -1,0 +1,146 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a draft of the Physio PoseNet API."
+  version: "1.0.0"
+  title: "Physio PoseNet"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "phys.io"
+basePath: "/api"
+tags:
+- name: "poses"
+  description: "Everything about your poses"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+security:
+- api_key: []
+paths:
+  /poses:
+    get:
+      tags:
+      - "poses"
+      summary: "Get all poses in the library"
+      operationId: "poses_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "All available poses"
+      x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+    post:
+      tags:
+      - "poses"
+      summary: "Add a new pose to the library"
+      description: ""
+      operationId: "add_pose"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "file"
+        in: "formData"
+        description: "Picture showing the pose that needs to be added to the library"
+        required: true
+        type: "file"
+      responses:
+        201:
+          description: "Pose has been added successfully"
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+  /poses/{poseId}:
+    get:
+      tags:
+      - "poses"
+      summary: "Find pose by ID"
+      description: "Returns a single pose"
+      operationId: "get_pose_by_id"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Pet"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pose not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+  /poses/{poseId}/check:
+    post:
+      tags:
+      - "poses"
+      summary: "Validates a pose"
+      description: "Validates a pose (sent in body) against the keypoints/skeleton\
+        \ in server"
+      operationId: "validate_pose"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to validate"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "file"
+        in: "formData"
+        description: "image of the pose to validate"
+        required: false
+        type: "file"
+      responses:
+        200:
+          description: "successful operation"
+      x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Tag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "Tag"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
