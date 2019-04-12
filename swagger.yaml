@@ -37,6 +37,8 @@ paths:
           name: body
           description: Picture showing the pose that needs to be added to the library
           required: true
+          schema:
+            $ref: '#/definitions/Tag'
       responses:
         '405':
           description: Invalid input
