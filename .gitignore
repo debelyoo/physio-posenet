@@ -21,3 +21,8 @@ dist/
 .rpt2_cache/
 
 *.pyc
+
+venv3
+venv
+
+
