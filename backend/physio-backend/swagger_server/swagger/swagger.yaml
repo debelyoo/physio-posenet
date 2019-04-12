@@ -10,7 +10,7 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "phys.io"
+host: "physio.test.sqooba.io"
 basePath: "/api"
 tags:
 - name: "poses"
@@ -19,6 +19,7 @@ tags:
     description: "Find out more"
     url: "http://swagger.io"
 schemes:
+- "https"
 - "http"
 security:
 - api_key: []
