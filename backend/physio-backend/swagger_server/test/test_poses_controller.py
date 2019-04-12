@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.pet import Pet  # noqa: E501
+from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 

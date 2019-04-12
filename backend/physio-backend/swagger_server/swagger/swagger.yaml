@@ -79,7 +79,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Pet"
+            $ref: "#/definitions/Tag"
         400:
           description: "Invalid ID supplied"
         404:
@@ -131,6 +131,9 @@ definitions:
         type: "string"
     xml:
       name: "Tag"
+    example:
+      name: "name"
+      id: 0
   ApiResponse:
     type: "object"
     properties:

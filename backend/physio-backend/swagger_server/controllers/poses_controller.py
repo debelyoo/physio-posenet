@@ -1,7 +1,7 @@
 import connexion
 import six
 
-from swagger_server.models.pet import Pet  # noqa: E501
+from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
 
 
@@ -26,7 +26,7 @@ def get_pose_by_id(poseId):  # noqa: E501
     :param poseId: ID of pose to return
     :type poseId: int
 
-    :rtype: Pet
+    :rtype: Tag
     """
     return 'do some magic!'
 

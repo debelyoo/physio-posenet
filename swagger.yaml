@@ -13,31 +13,31 @@ info:
 host: phys.io
 basePath: /api
 tags:
-  - name: poses
-    description: Everything about your poses
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
+- name: poses
+  description: Everything about your poses
+  externalDocs:
+    description: Find out more
+    url: 'http://swagger.io'
 schemes:
-  - http
+- http
 paths:
   /poses:
     post:
       tags:
-        - poses
+      - poses
       summary: Add a new pose to the library
       description: ''
       operationId: addPose
       consumes:
-        - multipart/form-data
+      - multipart/form-data
       produces:
-        - application/json
+      - application/json
       parameters:
-        - name: file
-          in: formData
-          description: Picture showing the pose that needs to be added to the library
-          required: true
-          type: file
+      - name: file
+        in: formData
+        description: Picture showing the pose that needs to be added to the library
+        required: true
+        type: file
       responses:
         '405':
           description: Invalid input
@@ -45,64 +45,64 @@ paths:
           description: 'Pose has been added successfully'
     get:
       tags:
-        - poses
+      - poses
       summary: Get all poses in the library
       produces:
-        - application/json
+      - application/json
       responses:
         '200':
           description: 'All available poses'
   /poses/{poseId}:
-      get:
-        tags:
-        - "poses"
-        summary: "Find pose by ID"
-        description: "Returns a single pose"
-        operationId: "getPoseById"
-        produces:
-        - "application/xml"
-        - "application/json"
-        parameters:
-        - name: "poseId"
-          in: "path"
-          description: "ID of pose to return"
-          required: true
-          type: "integer"
-          format: "int64"
-        responses:
-          200:
-            description: "successful operation"
-            schema:
-              $ref: "#/definitions/Pet"
-          400:
-            description: "Invalid ID supplied"
-          404:
-            description: "Pose not found"
-        security:
-        - api_key: []
+    get:
+      tags:
+      - "poses"
+      summary: "Find pose by ID"
+      description: "Returns a single pose"
+      operationId: "getPoseById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Tag"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pose not found"
+      security:
+      - api_key: []
   '/poses/{poseId}/check':
     post:
       tags:
-        - poses
+      - poses
       summary: Validates a pose
       description: 'Validates a pose (sent in body) against the keypoints/skeleton in server'
       operationId: validatePose
       consumes:
-        - multipart/form-data
+      - multipart/form-data
       produces:
-        - application/json
+      - application/json
       parameters:
-        - name: poseId
-          in: path
-          description: ID of pose to validate
-          required: true
-          type: integer
-          format: int64
-        - name: file
-          in: formData
-          description: image of the pose to validate
-          required: false
-          type: file
+      - name: poseId
+        in: path
+        description: ID of pose to validate
+        required: true
+        type: integer
+        format: int64
+      - name: file
+        in: formData
+        description: image of the pose to validate
+        required: false
+        type: file
       responses:
         '200':
           description: successful operation
