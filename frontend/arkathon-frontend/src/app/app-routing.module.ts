@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PosesComponent } from './poses/poses.component';
-import { AppComponent } from './app.component';
 import { CaptureCameraComponent } from './capture-camera/capture-camera.component';
+import { PatientComponent } from './patient/patient.component';
+import { ExerciseComponent } from './exercise/exercise.component';
 
 const routes: Routes = [
-  // { path: '', component: DashBoardComponent },
-  { path: 'poses', component: PosesComponent },
+  { path: 'patient', component: PatientComponent },
+  { path: 'exercise/:id', component: ExerciseComponent },
   { path: 'record', component: CaptureCameraComponent },
-  // { path: 'poses/:id',      component: PosesDetailComponent },
 ];
 
 @NgModule({

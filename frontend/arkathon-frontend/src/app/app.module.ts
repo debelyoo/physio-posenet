@@ -5,22 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import { PosesComponent } from './poses/poses.component';
+import {MatCardModule} from '@angular/material/card';
 import { CaptureCameraComponent } from './capture-camera/capture-camera.component';
+import { PatientComponent } from './patient/patient.component';
+import { BackendServiceService } from './services/backend-service.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ExerciseComponent } from './exercise/exercise.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PosesComponent,
-    CaptureCameraComponent
+    PatientComponent,
+    CaptureCameraComponent,
+    ExerciseComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [BackendServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

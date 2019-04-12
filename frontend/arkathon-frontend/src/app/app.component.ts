@@ -11,6 +11,6 @@ export class AppComponent {
 
   }
   openPatientPage() {
-    this.router.navigate(['poses']);
+    this.router.navigate(['patient']);
   }
 }
