@@ -1,0 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.nav-button-row button {
+    margin-right: 8px;
+}
