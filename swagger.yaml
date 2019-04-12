@@ -29,16 +29,15 @@ paths:
       description: ''
       operationId: addPose
       consumes:
-        - application/json
+        - multipart/form-data
       produces:
         - application/json
       parameters:
-        - in: body
-          name: body
+        - name: file
+          in: formData
           description: Picture showing the pose that needs to be added to the library
           required: true
-          schema:
-            $ref: '#/definitions/Tag'
+          type: file
       responses:
         '405':
           description: Invalid input
