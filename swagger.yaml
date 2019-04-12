@@ -102,3 +102,10 @@ definitions:
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+security:
+- api_key: []
