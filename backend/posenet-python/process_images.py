@@ -5,6 +5,14 @@ import argparse
 import os
 
 import posenet
+from posenet.constants import PART_NAMES
+
+
+class Coordinate():
+    def __init__(self, name, score, coordinates):
+        self.name = name
+        self.score = score
+        self.coordinates = coordinates
 
 
 parser = argparse.ArgumentParser()
@@ -67,9 +75,12 @@ def main():
                     if pose_scores[pi] == 0.:
                         break
                     print('Pose #%d, score = %f' % (pi, pose_scores[pi]))
+                    key_point_list = []
                     for ki, (s, c) in enumerate(zip(keypoint_scores[pi, :], keypoint_coords[pi, :, :])):
                         #print('Keypoint %s, score = %f, coord = %s' % (posenet.PART_NAMES[ki], s, c))
-                        print(posenet.PART_NAMES[ki], s, c)
+                        #print(posenet.PART_NAMES[ki], s, c)
+                        key_point_list.append(Coordinate(PART_NAMES[ki], s, list(c)).__dict__)
+                    print(key_point_list)
 
         print('Average FPS:', len(filenames) / (time.time() - start))
 
