@@ -28,4 +28,5 @@ dist/
 venv3
 venv
 
-
+images/
+output/
