@@ -53,3 +53,13 @@ def angle_between_matching_parts(reference_part, reading_part):
 
     angle_diff = part_ref_angle - part_read_angle
     return angle_diff
+
+
+for node in posenet.CONNECTED_PART_NAMES:
+
+    reference_part = (skeleton_ref[node[0]], skeleton_ref[node[1]])
+    reading_part = (skeleton_reading[node[0]], skeleton_reading[node[1]])
+
+    print("part name: {}".format(node))
+    angle_diff = angle_between_matching_parts(reference_part, reading_part)
+    print("angle_part_diff: {}".format(angle_diff))
