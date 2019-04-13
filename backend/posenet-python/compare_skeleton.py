@@ -55,11 +55,13 @@ def angle_between_matching_parts(reference_part, reading_part):
     return angle_diff
 
 
-for node in posenet.CONNECTED_PART_NAMES:
-
-    reference_part = (skeleton_ref[node[0]], skeleton_ref[node[1]])
-    reading_part = (skeleton_reading[node[0]], skeleton_reading[node[1]])
-
-    print("part name: {}".format(node))
-    angle_diff = angle_between_matching_parts(reference_part, reading_part)
-    print("angle_part_diff: {}".format(angle_diff))
+def compare_skeleton(skeleton_reference, skeleton_reading):
+    """ iterate over all body parts and check the angle differences
+        between reference and reading parts """
+    skeleton_matched = {}
+    for body_part in posenet.CONNECTED_PART_NAMES:
+        reference_part = (skeleton_reference[body_part[0]], skeleton_reference[body_part[1]])
+        reading_part = (skeleton_reading[body_part[0]], skeleton_reading[body_part[1]])
+        angle_diff = angle_between_matching_parts(reference_part, reading_part)
+        skeleton_matched[body_part] = angle_diff
+    return skeleton_matched
