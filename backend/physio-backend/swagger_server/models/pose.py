@@ -10,6 +10,9 @@ class Pose(Base):
     name = Column(String(50))
     thumbnail = Column(String(500))
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
     def __repr__(self):
         return "<Pose(poseid='%s', name='%s')>" % (self.poseid, self.name)
 

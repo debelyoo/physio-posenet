@@ -118,3 +118,12 @@ def get_image(poseId):
         return image
     except Exception as e:
         print(e)
+
+def get_poses():
+    session = sessionmaker(bind=engine)()
+    try:
+        poses = session.query(Pose).all()
+
+        return poses
+    except Exception as e:
+        print(e)
