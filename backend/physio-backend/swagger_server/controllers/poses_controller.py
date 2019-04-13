@@ -4,7 +4,9 @@ import six
 from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
 from flask import Response
-from swagger_server.pose.pose_handler import extract_keypoints
+from swagger_server.pose.pose_handler import extract_keypoints, get_image
+from flask import send_file
+from ..physio_utils import load_config
 
 def add_pose(file):  # noqa: E501
     """Add a new pose to the library
@@ -72,7 +74,13 @@ def get_image_by_pose_id_and_index(poseId, index):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+
+    image = get_image(poseId)
+
+    config = load_config("config.yml")
+    pose_folder = model_dir = config["poseFolder"]
+    filename = '{}/raw/{}{}'.format(pose_folder, poseId, image.extension)
+    return send_file(filename, mimetype='image/png')
 
 
 def get_image_with_skeleton_by_pose_id_and_index(poseId, index):  # noqa: E501
