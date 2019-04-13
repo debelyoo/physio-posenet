@@ -10,20 +10,17 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./exercise.component.css']
 })
 export class ExerciseComponent implements OnInit, OnDestroy {
-  private URL = 'https://physio.test.sqooba.io/api/poses/0/check';
+  private URL = 'https://physio.test.sqooba.io/api/poses/';
   private readonly routeSubscription: Subscription;
   private backendSubscription: Subscription;
 
   @ViewChild('videoElement') videoElement: any;
   private video: any;
   public videoOn = false;
-  public countDown: number = 7;
   public interval;
-  public bigNumber = false;
 
   @ViewChild("canvas")
   public canvas: ElementRef;
-  public captures: Array<any>;
 
   public picture = '';
 
@@ -40,7 +37,6 @@ export class ExerciseComponent implements OnInit, OnDestroy {
           );
         }
       });
-    this.captures = [];
    }
 
   ngOnInit () {
@@ -48,24 +44,14 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   }
 
   public takePicture() {
-    this.bigNumber = true;
     this.initCamera({ video: true, audio: false });
     this.interval = setInterval(() => {
-      if(this.countDown > 0) {
-        this.countDown--;
-      } else {
-        this.countDown = null;
-        this.bigNumber = false; 
-        this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
-        this.http.post(this.URL, this.captures[0]);
-        this.video.pause();
-        setTimeout(() => clearInterval(this.interval), 500);
-      };
+      let ctx = this.canvas.nativeElement.getContext('2d');
+      ctx.drawImage(this.video, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+      let img = new Image();
+      img.src = this.canvas.nativeElement.toDataURL("image/png");
+      this.http.post(this.URL + 1337 + "/check", img).subscribe(res => console.log(res));
     }, 1000)
-  }
-
-  public setFont () {
-    return this.bigNumber ? 100 : 16;
   }
 
   private initCamera (config: any) {

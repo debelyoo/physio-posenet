@@ -18,7 +18,6 @@
     </mat-card-header>
     <video #videoElement></video>
     <canvas #canvas id="canvas" width="640" height="480"></canvas>
-    <div [style.font-size.px]="setFont()">{{ countDown }}</div>
     <mat-card-actions>
         <button class="mg-2" (click)="takePicture()" mat-raised-button>Take Picture</button>
     </mat-card-actions>
