@@ -1,11 +1,15 @@
 <mat-toolbar>
     <mat-toolbar-row>
+      <img src="../assets/Physio_logo.png" alt="Phys.io Logo" (click)="goHome()">
         <div>
             <button mat-button (click)="goBack()">Back</button>
         </div>
         <div class="nav-button-row">
           <button mat-raised-button (click)="openDoctorPage()">Doctor</button>
           <button mat-raised-button (click)="openPatientPage()">Patient</button>
+        </div>
+        <div>
+            <button mat-button (click)="seeCharts()">Awards</button>
         </div>
     </mat-toolbar-row>
   </mat-toolbar>

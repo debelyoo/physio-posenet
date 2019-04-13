@@ -3,5 +3,9 @@ button {
 }
 
 mat-toolbar {
-    background-color: #B3E5FC;
+    background-color: #74ebd5;
+}
+
+img {
+    max-height: 50px;
 }

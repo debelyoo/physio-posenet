@@ -21,7 +21,15 @@ export class AppComponent {
     this.router.navigate(['doctor']);
   }
 
+  public seeCharts () {
+    this.router.navigate(['charts']);
+  }
+
   public goBack () {
     this._location.back();
+  }
+
+  public goHome () {
+    this.router.navigate(['']);
   }
 }

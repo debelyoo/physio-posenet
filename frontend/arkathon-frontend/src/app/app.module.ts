@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import { ElectrodesComponent } from './electrodes/electrodes.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
+import { GamificationComponent } from './gamification/gamification.component';
+import { VideoExerciseComponent } from './video-exercise/video-exercise.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { DoctorViewComponent } from './doctor-view/doctor-view.component';
     ExerciseComponent,
     ExerciseTableComponent,
     ElectrodesComponent,
-    DoctorViewComponent
+    DoctorViewComponent,
+    GamificationComponent,
+    VideoExerciseComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { DoctorViewComponent } from './doctor-view/doctor-view.component';
     MatCardModule,
     MatProgressBarModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ChartsModule
   ],
   providers: [BackendServiceService],
   bootstrap: [AppComponent]

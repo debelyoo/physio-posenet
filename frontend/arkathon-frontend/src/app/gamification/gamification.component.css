@@ -1,0 +1,21 @@
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.extra-margin {
+    margin: 12px;
+}
+
+.push-right {
+    margin-left: 70px;
+}
+
+img {
+    max-width: 170px;
+    padding: 20px;
+}
+
+mat-card {
+    max-height: 250px;
+}

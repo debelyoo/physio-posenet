@@ -1,13 +1,10 @@
 <div class="row">
   <mat-card class="exercise-video-card">
     <mat-card-header>
-      <mat-card-title>Exercise 1</mat-card-title>
+      <mat-card-title>Exercise 1 Picture</mat-card-title>
     </mat-card-header>
-    <video src=""></video>
-    <mat-card-actions>
-        <button mat-button>Start</button>
-        <button mat-button>Pause</button>
-      </mat-card-actions>
+    {{picture}}
+    <img src="">
     <mat-card-content>
       <p>
         Description of the exercise...
@@ -17,9 +14,14 @@
 
   <mat-card class="exercise-record-card">
     <mat-card-header>
-      <mat-card-title>You</mat-card-title>
+      <mat-card-title>Take Image</mat-card-title>
     </mat-card-header>
-    <app-capture-camera></app-capture-camera>
+    <video #videoElement></video>
+    <canvas #canvas id="canvas" width="640" height="480"></canvas>
+    <div [style.font-size.px]="setFont()">{{ countDown }}</div>
+    <mat-card-actions>
+        <button class="mg-2" (click)="takePicture()" mat-raised-button>Take Picture</button>
+    </mat-card-actions>
   </mat-card>
 </div>
 <div>
