@@ -26,3 +26,13 @@ class Image(Base):
 
     def __repr__(self):
         return "<Image(poseid='%s',index='%d')>" % (self.poseid, self.index)
+
+class Placement(Base):
+    __tablename__ = 'placements'
+    id = Column(Integer, Sequence('placement_id_seq'), primary_key=True)
+    placementid = Column(String(50))
+    bbox = Column(String(500))
+    index = Integer
+
+    def __repr__(self):
+        return "<Placement(placementid='%s',index='%d')>" % (self.placementid, self.index)

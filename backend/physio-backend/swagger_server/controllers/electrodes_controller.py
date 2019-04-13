@@ -2,7 +2,8 @@ import connexion
 import six
 
 from swagger_server import util
-
+from swagger_server.electrode.electrode_handler import extract_bounding_boxes, get_placement_image
+from flask import Response
 
 def add_electrode(file):  # noqa: E501
     """Add a new electrode to the library
@@ -14,7 +15,9 @@ def add_electrode(file):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    placement_id, _ = extract_bounding_boxes(file)
+
+    return Response("{'message':'Electrode placement uploaded !', 'id':'" + placement_id + "'}", status=201, mimetype='application/json')
 
 
 def api_electrodes_get():  # noqa: E501
@@ -40,7 +43,7 @@ def get_image_by_electrode_id_and_index(electrodeId, index):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return get_placement_image(electrodeId, index)
 
 
 def validate_electrodes(electrodeId, file=None):  # noqa: E501
