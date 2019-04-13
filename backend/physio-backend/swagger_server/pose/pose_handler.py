@@ -9,6 +9,8 @@ from .posenet.decode import decode_multiple_poses
 from .posenet.constants import PART_NAMES
 from ..util import load_config
 import tensorflow as tf
+import cv2
+import numpy as np
 
 
 
@@ -77,15 +79,21 @@ def save_pose(file):
         pose_uuid = str(uuid.uuid4())
 
         # save file to disk
+        filename, file_extension = os.path.splitext(file.filename)
         pose_folder = "/tmp/physio/poses"
-        filename = pose_uuid + ".png"
+        filename_uuid = pose_uuid + file_extension
         if file:
-            fullPath = os.path.join(pose_folder, filename)
+            fullPath = os.path.join(pose_folder, filename_uuid)
             os.makedirs(os.path.dirname(fullPath), exist_ok=True)
             file.save(fullPath)
 
+        file.seek(0)
+        img_str = file.read()
+        file.close()
         # process the image
-        input_image, draw_image, output_scale = process_input(file, output_stride=output_stride)
+        nparr = np.fromstring(img_str, np.uint8)
+        img_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        input_image, draw_image, output_scale = process_input(img_np, output_stride=output_stride)
         # get the scores and the coordinates
         pose_scores, keypoint_scores, keypoint_coords = _get_scores(input_image)
         # scale the coordinates
