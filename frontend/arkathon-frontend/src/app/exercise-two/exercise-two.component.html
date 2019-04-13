@@ -1,0 +1,26 @@
+<div class="row">
+    <mat-card class="exercise-video-card">
+      <mat-card-header>
+        <mat-card-title>Knee Exercise</mat-card-title>
+      </mat-card-header>
+      <img src="../../assets/Knee_start_good.jpg">
+      <mat-card-content>
+        <p>
+          Fléchissez lentement les genoux jusqu'à 90° en abaissant des fessiers en arrière. Répétez de mouvement jusqu'à ressentir 
+          une fatigue musculaire dans les cuisses. Réalisez trois séries intercalées par des pauses de 30 secondes.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="exercise-record-card">
+      <mat-card-header>
+        <mat-card-title>Take Image</mat-card-title>
+      </mat-card-header>
+      <video #videoElement></video>
+      <canvas #canvas id="canvas" width="640" height="480"></canvas>
+      <div [style.font-size.px]="setFont()">{{ countDown }}</div>
+      <mat-card-actions>
+          <button class="mg-2" (click)="takePicture()" mat-raised-button>Take Picture</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { BackendServiceService } from '../services/backend-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { BackendServiceService } from '../services/backend-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-exercise',
-  templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.css']
+  selector: 'app-exercise-two',
+  templateUrl: './exercise-two.component.html',
+  styleUrls: ['./exercise-two.component.css']
 })
-export class ExerciseComponent implements OnInit, OnDestroy {
+export class ExerciseTwoComponent implements OnInit {
   private URL = 'https://physio.test.sqooba.io/api/poses/0/check';
   private readonly routeSubscription: Subscription;
   private backendSubscription: Subscription;

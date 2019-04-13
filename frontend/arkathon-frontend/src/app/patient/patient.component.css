@@ -1,7 +1,26 @@
 .exercise-card {
+    margin: 8px;
     max-width: 400px;
 }
 
 .mg-6 {
     margin: 6px;
+}
+
+.flex-div {
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    padding-left: 100px;
+    max-width: 200px;
+}
+
+.push-down {
+    padding-top: 20px;
+}
+
+mat-card-actions {
+    padding-left: 75px;
 }

@@ -1,20 +1,39 @@
 <button class="mg-6" mat-raised-button color="primary" (click)="goToElectrodes()">Attach Electrodes</button>
-<div>
-  <mat-card *ngFor="let p of pose" class="exercise-card">
+<div class="flex-div">
+  <mat-card class="exercise-card">
     <mat-card-header>
       <mat-card-title>
-        {{p}}
+        Shoulder Excercise
       </mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Teaser of exercise 1">
+    <img mat-card-image src="../../assets/Shoulder_start_good.jpg" alt="Teaser of exercise 1">
     <mat-card-content>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        En position debout, le coude collé au corps fléchi à 90° et élastique dans la main. L'élastique doit être tendu dès la position de départ.
+        Effectuez une rotation externe (éloignez la main vers l'extérieur en gardant le coude au corps) puis revenez à la position de départ.
       </p>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="goToPictureExercise(1)">Picture Exercise</button>
       <button mat-raised-button color="primary" (click)="goToVideoExercise(1)">Video Exercise</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="exercise-card">
+    <mat-card-header>
+      <mat-card-title>
+        Knee Excercise
+      </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="../../assets/Knee_start_good.jpg" alt="Teaser of exercise 1">
+    <mat-card-content>
+      <p class="push-down">
+        Fléchissez lentement les genoux jusqu'à 90° en abaissant des fessiers en arrière. Répétez de mouvement jusqu'à ressentir 
+        une fatigue musculaire dans les cuisses. Réalisez trois séries intercalées par des pauses de 30 secondes.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goToPictureExercise(2)">Picture Exercise</button>
+      <button mat-raised-button color="primary" (click)="goToVideoExercise(2)">Video Exercise</button>
     </mat-card-actions>
   </mat-card>
 </div>

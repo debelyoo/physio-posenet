@@ -20,6 +20,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { GamificationComponent } from './gamification/gamification.component';
 import { VideoExerciseComponent } from './video-exercise/video-exercise.component';
+import { ExerciseTwoComponent } from './exercise-two/exercise-two.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { VideoExerciseComponent } from './video-exercise/video-exercise.componen
     ElectrodesComponent,
     DoctorViewComponent,
     GamificationComponent,
-    VideoExerciseComponent
+    VideoExerciseComponent,
+    ExerciseTwoComponent
   ],
   imports: [
     BrowserModule,
