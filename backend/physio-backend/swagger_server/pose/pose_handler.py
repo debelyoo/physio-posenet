@@ -77,6 +77,7 @@ def extract_keypoints(file, persist=True):
         # process the image
         nparr = np.fromstring(img_str, np.uint8)
         img_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        img_np = cv2.resize(img_np, (360, 480))
         input_image, draw_image, output_scale = process_input(img_np, output_stride=output_stride)
         # get the scores and the coordinates
         pose_scores, keypoint_scores, keypoint_coords = _get_scores(input_image)

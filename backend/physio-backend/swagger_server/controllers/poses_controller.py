@@ -1,8 +1,6 @@
 import connexion
 import six
 from math import atan2, degrees
-import posenet.constants
-
 from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
 from flask import Response
@@ -11,6 +9,15 @@ from flask import send_file
 from ..physio_utils import load_config
 import json
 
+
+CONNECTED_PART_NAMES = [
+    ("leftHip", "leftShoulder"), ("leftElbow", "leftShoulder"),
+    ("leftElbow", "leftWrist"), ("leftHip", "leftKnee"),
+    ("leftKnee", "leftAnkle"), ("rightHip", "rightShoulder"),
+    ("rightElbow", "rightShoulder"), ("rightElbow", "rightWrist"),
+    ("rightHip", "rightKnee"), ("rightKnee", "rightAnkle"),
+    ("leftShoulder", "rightShoulder"), ("leftHip", "rightHip")
+]
 
 def angle_between_matching_parts(reference_part, reading_part):
     """ get angle between reference part and reading part
@@ -31,13 +38,14 @@ def compare_skeleton(skeleton_reference, skeleton_reading):
     """ iterate over all body parts and check the angle differences
         between reference and reading parts """
     skeleton_matched = {}
-    for body_part in posenet.CONNECTED_PART_NAMES:
+    for body_part in CONNECTED_PART_NAMES:
         reference_part = (skeleton_reference[body_part[0]],
                           skeleton_reference[body_part[1]])
+
         reading_part = (skeleton_reading[body_part[0]],
                         skeleton_reading[body_part[1]])
         angle_diff = angle_between_matching_parts(reference_part, reading_part)
-        skeleton_matched[body_part] = degrees(angle_diff)
+        skeleton_matched[body_part[0] + ', ' + body_part[1]] = degrees(angle_diff)
     return skeleton_matched
 
 
@@ -102,9 +110,14 @@ def validate_pose(poseId, file=None):  # noqa: E501
 
     # from patient
     _, keypoints = extract_keypoints(file, False)
+    keypoints = json.loads(keypoints)
     image = get_image(poseId)
     # from doctor
     reference_keypoints = json.loads(image.keypoints)
+
+    print(keypoints)
+    print(reference_keypoints)
+
     matched_skeleton = compare_skeleton(reference_keypoints, keypoints)
 
     return matched_skeleton
