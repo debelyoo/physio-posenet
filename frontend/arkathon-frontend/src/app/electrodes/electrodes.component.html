@@ -1,2 +1,10 @@
-<!-- Needs to be replced with HTML for setting electrodes -->
-<app-capture-camera></app-capture-camera>
+<mat-card class="push-down">
+    <mat-card-actions>
+        <button (click)="record()" mat-raised-button>Record</button>
+    </mat-card-actions>
+    <div>
+    <video class="rotate-video" #videoElement2></video>
+        <img class="overlay-image">
+    </div>
+    <canvas hidden #canvas2 id="canvas2" width="640" height="480"></canvas>
+</mat-card>
