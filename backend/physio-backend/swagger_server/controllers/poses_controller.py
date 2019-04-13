@@ -22,7 +22,7 @@ def add_pose(file):  # noqa: E501
 
     pose_uuid, _ = extract_keypoints(file)
 
-    return Response("{'message':'Pose uploaded !', 'id':'" + pose_uuid + "'}", status=201, mimetype='application/json')
+    return Response('{"message":"Pose uploaded !", "id":"' + pose_uuid + '"}', status=201, mimetype='application/json')
 
 
 def get_pose_by_id(poseId):  # noqa: E501
