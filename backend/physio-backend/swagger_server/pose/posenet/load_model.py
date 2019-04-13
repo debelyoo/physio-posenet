@@ -63,8 +63,6 @@ def load_posenet_model(serve_dir=SERVE_DIR, pb_file_name=PB_FILE_NAME, config_fi
 
     # load the frozen model
     frozen_graph_path = os.path.join(serve_dir, pb_file_name)
-    print("plop")
-    print(frozen_graph_path)
 
     posnet_graph = _load_graph(frozen_graph_path)
 
@@ -80,4 +78,4 @@ def load_posenet_model(serve_dir=SERVE_DIR, pb_file_name=PB_FILE_NAME, config_fi
     config_path_name = os.path.join(serve_dir, config_file_name)
     output_stride = _load_output_stride(config_path_name)
 
-    return output_stride, [heatmaps, offsets, displacement_fwd, displacement_bwd]
+    return temp_sess, output_stride, [heatmaps, offsets, displacement_fwd, displacement_bwd]

@@ -4,7 +4,7 @@ import six
 from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
 from flask import Response
-from swagger_server.pose.pose_handler import save_pose
+from swagger_server.pose.pose_handler import extract_keypoints
 
 def add_pose(file):  # noqa: E501
     """Add a new pose to the library
@@ -17,9 +17,9 @@ def add_pose(file):  # noqa: E501
     :rtype: None
     """
 
-    pose_uuid = save_pose(file)
+    pose_uuid, _ = extract_keypoints(file)
 
-    return Response("{'message':'Pose uploaded !', 'id': pose_uuid}", status=201, mimetype='application/json')
+    return Response("{'message':'Pose uploaded !', 'id':'" + pose_uuid + "'}", status=201, mimetype='application/json')
 
 
 def get_pose_by_id(poseId):  # noqa: E501
