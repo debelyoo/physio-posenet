@@ -4,9 +4,10 @@ import six
 from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
 from flask import Response
-from swagger_server.pose.pose_handler import extract_keypoints, get_image
+from swagger_server.pose.pose_handler import extract_keypoints, get_image, get_poses
 from flask import send_file
 from ..physio_utils import load_config
+import json
 
 def add_pose(file):  # noqa: E501
     """Add a new pose to the library
@@ -45,7 +46,13 @@ def poses_get():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+
+    poses = []
+    for pose in get_poses():
+        poses.append(pose.as_dict())
+    json_string = json.dumps(poses)
+
+    return Response(json_string, status=200, mimetype='application/json')
 
 
 def validate_pose(poseId, file=None):  # noqa: E501
