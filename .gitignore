@@ -22,6 +22,9 @@ dist/
 
 *.pyc
 
+
+.DS_Store
+
 venv3
 venv
 
