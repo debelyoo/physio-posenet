@@ -104,4 +104,4 @@ def extract_keypoints(file, persist=True):
         if persist:
             session.rollback()
 
-    return uuid, json_string
+    return pose_uuid, json_string
