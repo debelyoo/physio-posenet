@@ -26,13 +26,35 @@ class TestPosesController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
+    def test_get_image_by_pose_id_and_index(self):
+        """Test case for get_image_by_pose_id_and_index
+
+        Find image for a pose by index
+        """
+        response = self.client.open(
+            '/api/poses/{poseId}/images/raw/{index}'.format(poseId='poseId_example', index=789),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_image_with_skeleton_by_pose_id_and_index(self):
+        """Test case for get_image_with_skeleton_by_pose_id_and_index
+
+        Find image with skeleton for a pose by index
+        """
+        response = self.client.open(
+            '/api/poses/{poseId}/images/skeleton/{index}'.format(poseId='poseId_example', index=789),
+            method='GET')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
     def test_get_pose_by_id(self):
         """Test case for get_pose_by_id
 
         Find pose by ID
         """
         response = self.client.open(
-            '/api/poses/{poseId}'.format(poseId=789),
+            '/api/poses/{poseId}'.format(poseId='poseId_example'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -55,7 +77,7 @@ class TestPosesController(BaseTestCase):
         """
         data = dict(file=(BytesIO(b'some file data'), 'file.txt'))
         response = self.client.open(
-            '/api/poses/{poseId}/check'.format(poseId=789),
+            '/api/poses/{poseId}/check'.format(poseId='poseId_example'),
             method='POST',
             data=data,
             content_type='multipart/form-data')

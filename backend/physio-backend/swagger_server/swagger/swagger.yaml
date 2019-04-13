@@ -18,12 +18,33 @@ tags:
   externalDocs:
     description: "Find out more"
     url: "http://swagger.io"
+- name: "electrodes"
+  description: "Everything about your electrodes"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+- name: "front"
+  description: "The static pages"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
 schemes:
 - "https"
 - "http"
 security:
 - api_key: []
 paths:
+  /front:
+    get:
+      tags:
+      - "front"
+      summary: "Get the home page"
+      operationId: "front_get"
+      parameters: []
+      responses:
+        200:
+          description: "The home page"
+      x-swagger-router-controller: "swagger_server.controllers.front_controller"
   /poses:
     get:
       tags:
@@ -74,13 +95,74 @@ paths:
         in: "path"
         description: "ID of pose to return"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       responses:
         200:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Tag"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pose not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+  /poses/{poseId}/images/raw/{index}:
+    get:
+      tags:
+      - "poses"
+      summary: "Find image for a pose by index"
+      description: "Returns a single image"
+      operationId: "get_image_by_pose_id_and_index"
+      produces:
+      - "image/*"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to return"
+        required: true
+        type: "string"
+      - name: "index"
+        in: "path"
+        description: "index of the image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pose not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+  /poses/{poseId}/images/skeleton/{index}:
+    get:
+      tags:
+      - "poses"
+      summary: "Find image with skeleton for a pose by index"
+      description: "Returns a single image with skeleton"
+      operationId: "get_image_with_skeleton_by_pose_id_and_index"
+      produces:
+      - "image/*"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to return"
+        required: true
+        type: "string"
+      - name: "index"
+        in: "path"
+        description: "index of the image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
         400:
           description: "Invalid ID supplied"
         404:
@@ -105,8 +187,7 @@ paths:
         in: "path"
         description: "ID of pose to validate"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       - name: "file"
         in: "formData"
         description: "image of the pose to validate"
@@ -116,6 +197,100 @@ paths:
         200:
           description: "successful operation"
       x-swagger-router-controller: "swagger_server.controllers.poses_controller"
+  /electrodes:
+    get:
+      tags:
+      - "electrodes"
+      summary: "Get all electrodes in the library"
+      operationId: "electrodes_get"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "All available electrodes"
+      x-swagger-router-controller: "swagger_server.controllers.electrodes_controller"
+    post:
+      tags:
+      - "electrodes"
+      summary: "Add a new electrode to the library"
+      description: ""
+      operationId: "add_electrode"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "file"
+        in: "formData"
+        description: "Picture showing the electrode that needs to be added to the\
+          \ library"
+        required: true
+        type: "file"
+      responses:
+        201:
+          description: "Electrode has been added successfully"
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.electrodes_controller"
+  /electrodes/{electrodeId}/images/raw/{index}:
+    get:
+      tags:
+      - "electrodes"
+      summary: "Find image for an electrode by index"
+      description: "Returns a single image"
+      operationId: "get_image_by_electrode_id_and_index"
+      produces:
+      - "image/*"
+      parameters:
+      - name: "electrodeId"
+        in: "path"
+        description: "ID of electrode to return"
+        required: true
+        type: "string"
+      - name: "index"
+        in: "path"
+        description: "index of the image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Electrode not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "swagger_server.controllers.electrodes_controller"
+  /electrodes/{electrodeId}/check:
+    post:
+      tags:
+      - "electrodes"
+      summary: "Validates electrodes position"
+      description: "Validates the electrodes (sent in body) against the reference\
+        \ in server"
+      operationId: "validate_electrodes"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "electrodeId"
+        in: "path"
+        description: "ID of electrode to validate"
+        required: true
+        type: "string"
+      - name: "file"
+        in: "formData"
+        description: "image of the electrode to validate"
+        required: false
+        type: "file"
+      responses:
+        200:
+          description: "successful operation"
+      x-swagger-router-controller: "swagger_server.controllers.electrodes_controller"
 securityDefinitions:
   api_key:
     type: "apiKey"

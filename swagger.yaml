@@ -18,10 +18,28 @@ tags:
   externalDocs:
     description: Find out more
     url: 'http://swagger.io'
+- name: electrodes
+  description: Everything about your electrodes
+  externalDocs:
+    description: Find out more
+    url: 'http://swagger.io'
+- name: front
+  description: The static pages
+  externalDocs:
+    description: Find out more
+    url: 'http://swagger.io'
 schemes:
 - https
 - http
 paths:
+  /front:
+    get:
+      tags:
+      - front
+      summary: Get the home page
+      responses:
+        '200':
+          description: 'The home page'
   /poses:
     post:
       tags:
@@ -68,13 +86,72 @@ paths:
         in: "path"
         description: "ID of pose to return"
         required: true
-        type: "integer"
-        format: "int64"
+        type: string
       responses:
         200:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Tag"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pose not found"
+      security:
+      - api_key: []
+  /poses/{poseId}/images/raw/{index}:
+    get:
+      tags:
+      - "poses"
+      summary: "Find image for a pose by index"
+      description: "Returns a single image"
+      operationId: "getImageByPoseIdAndIndex"
+      produces:
+      - "image/*"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to return"
+        required: true
+        type: "string"
+      - name: "index"
+        in: "path"
+        description: "index of the image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pose not found"
+      security:
+      - api_key: []
+  /poses/{poseId}/images/skeleton/{index}:
+    get:
+      tags:
+      - "poses"
+      summary: "Find image with skeleton for a pose by index"
+      description: "Returns a single image with skeleton"
+      operationId: "getImageWithSkeletonByPoseIdAndIndex"
+      produces:
+      - "image/*"
+      parameters:
+      - name: "poseId"
+        in: "path"
+        description: "ID of pose to return"
+        required: true
+        type: "string"
+      - name: "index"
+        in: "path"
+        description: "index of the image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
         400:
           description: "Invalid ID supplied"
         404:
@@ -97,11 +174,96 @@ paths:
         in: path
         description: ID of pose to validate
         required: true
-        type: integer
-        format: int64
+        type: string
       - name: file
         in: formData
         description: image of the pose to validate
+        required: false
+        type: file
+      responses:
+        '200':
+          description: successful operation
+  /electrodes:
+    post:
+      tags:
+      - electrodes
+      summary: Add a new electrode to the library
+      description: ''
+      operationId: addElectrode
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: file
+        in: formData
+        description: Picture showing the electrode that needs to be added to the library
+        required: true
+        type: file
+      responses:
+        '405':
+          description: Invalid input
+        '201':
+          description: 'Electrode has been added successfully'
+    get:
+      tags:
+      - electrodes
+      summary: Get all electrodes in the library
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'All available electrodes'
+  /electrodes/{electrodeId}/images/raw/{index}:
+    get:
+      tags:
+      - "electrodes"
+      summary: "Find image for an electrode by index"
+      description: "Returns a single image"
+      operationId: "getImageByElectrodeIdAndIndex"
+      produces:
+      - "image/*"
+      parameters:
+      - name: "electrodeId"
+        in: "path"
+        description: "ID of electrode to return"
+        required: true
+        type: "string"
+      - name: "index"
+        in: "path"
+        description: "index of the image"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Electrode not found"
+      security:
+      - api_key: []
+  '/electrodes/{electrodeId}/check':
+    post:
+      tags:
+      - electrodes
+      summary: Validates electrodes position
+      description: 'Validates the electrodes (sent in body) against the reference in server'
+      operationId: validateElectrodes
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: electrodeId
+        in: path
+        description: ID of electrode to validate
+        required: true
+        type: string
+      - name: file
+        in: formData
+        description: image of the electrode to validate
         required: false
         type: file
       responses:
