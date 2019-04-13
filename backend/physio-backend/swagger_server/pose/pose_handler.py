@@ -96,7 +96,7 @@ def extract_keypoints(file, persist=True):
             json_string = json.dumps(key_point_list)
             # TODO: save the draw_image and the key-points
             if persist:
-                pose = Pose(uuid=pose_uuid, keypoints=json_string)
+                pose = Pose(poseid=pose_uuid, keypoints=json_string)
                 session.add(pose)
                 session.commit()
     except Exception as e:
