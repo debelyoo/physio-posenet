@@ -28,11 +28,6 @@ if not engine.dialect.has_table(engine.connect(), table_name):
 # load the posenet model
 ts_session, output_stride, model_outputs = load_posenet_model(serve_dir=model_dir)
 
-class Coordinate():
-    def __init__(self, name, score, coordinates):
-        self.name = name
-        self.score = score
-        self.coordinates = coordinates
 
 def _get_scores(input_image):
     """
@@ -89,11 +84,11 @@ def extract_keypoints(file, persist=True):
                                           min_pose_score=0.25, min_part_score=0.25)
 
             # save the name of the key-point, its score and coordinates
-            key_point_list = []
+            key_point_dict = {}
             for ki, (s, c) in enumerate(zip(keypoint_scores[0, :], keypoint_coords[0, :, :])):
-                key_point_list.append(Coordinate(PART_NAMES[ki], s, list(c)).__dict__)
+                key_point_dict[PART_NAMES[ki]] = (s, c[0], c[1])
 
-            json_string = json.dumps(key_point_list)
+            json_string = json.dumps(key_point_dict)
             # TODO: save the draw_image and the key-points
             thumbnail_url = '/poses/'+ pose_uuid +'/images/raw/' + index
             if persist:
