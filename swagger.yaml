@@ -23,10 +23,23 @@ tags:
   externalDocs:
     description: Find out more
     url: 'http://swagger.io'
+- name: front
+  description: The static pages
+  externalDocs:
+    description: Find out more
+    url: 'http://swagger.io'
 schemes:
 - https
 - http
 paths:
+  /front:
+    get:
+      tags:
+      - front
+      summary: Get the home page
+      responses:
+        '200':
+          description: 'The home page'
   /poses:
     post:
       tags:
