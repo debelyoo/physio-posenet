@@ -59,3 +59,32 @@ def validate_pose(poseId, file=None):  # noqa: E501
     :rtype: None
     """
     return 'do some magic!'
+
+def get_image_by_pose_id_and_index(poseId, index):  # noqa: E501
+    """Find image for a pose by index
+
+    Returns a single image # noqa: E501
+
+    :param poseId: ID of pose to return
+    :type poseId: str
+    :param index: index of the image
+    :type index: int
+
+    :rtype: None
+    """
+    return 'do some magic!'
+
+
+def get_image_with_skeleton_by_pose_id_and_index(poseId, index):  # noqa: E501
+    """Find image with skeleton for a pose by index
+
+    Returns a single image with skeleton # noqa: E501
+
+    :param poseId: ID of pose to return
+    :type poseId: str
+    :param index: index of the image
+    :type index: int
+
+    :rtype: None
+    """
+    return 'do some magic!'
