@@ -11,6 +11,7 @@ import { PatientComponent } from './patient/patient.component';
 import { BackendServiceService } from './services/backend-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ExerciseComponent } from './exercise/exercise.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ExerciseComponent } from './exercise/exercise.component';
     AppRoutingModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
   ],
   providers: [BackendServiceService],
   bootstrap: [AppComponent]

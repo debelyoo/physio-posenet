@@ -1,0 +1,12 @@
+.row {
+    display: flex;
+}
+
+.exercise-video-card {
+    max-width: 500px;
+    margin: 2px;
+}
+
+.exercise-record-card {
+    margin: 2px;
+}

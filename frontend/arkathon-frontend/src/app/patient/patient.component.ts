@@ -11,17 +11,18 @@ export class PatientComponent implements OnInit {
 
   public pose = [];
 
-  constructor(private backendService: BackendServiceService,
-    private router: Router) { 
-    backendService.getPoses().subscribe((pose)=>{
-      this.pose.push(pose)
-    })
+  constructor (private backendService: BackendServiceService,
+    private router: Router) {
+    backendService.getPoses()
+    .subscribe((pose) => {
+      this.pose.push(pose);
+    });
   }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
-  goToExercise(id){
+  goToExercise (id) {
     this.router.navigate(['exercise/' + id]);
   }
 

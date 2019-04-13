@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class BackendServiceService {
 
-  private BASE_URL: string  = 'https://physio.test.sqooba.io/api/';
+  private BASE_URL = 'https://physio.test.sqooba.io/api/';
 
   constructor(private http: HttpClient) { }
 
