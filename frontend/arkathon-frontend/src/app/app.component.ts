@@ -13,11 +13,15 @@ export class AppComponent {
     private _location: Location) {
   }
 
-  openPatientPage () {
+  public openPatientPage () {
     this.router.navigate(['patient']);
   }
 
-  goBack () {
+  public openDoctorPage () {
+    this.router.navigate(['doctor']);
+  }
+
+  public goBack () {
     this._location.back();
   }
 }

@@ -9,16 +9,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ExerciseComponent implements OnInit {
 
-  constructor (private route: ActivatedRoute, 
+  constructor (private route: ActivatedRoute,
     private backendService: BackendServiceService) {
       route.params.subscribe((param) => {
         if (param.id) {
           backendService.getOnePose(0)
           .subscribe(
             (pose) => console.log(pose)
-          )
+          );
         }
-      })
+      });
    }
 
   ngOnInit () {
