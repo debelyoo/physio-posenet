@@ -4,18 +4,27 @@
 }
 
 .extra-margin {
-    margin: 12px;
+    margin: 9px;
 }
 
 .push-right {
     margin-left: 70px;
 }
 
+.push-righter {
+    margin-left: 80px;
+    padding-right: 90px;
+}
+
 img {
-    max-width: 170px;
+    max-width: 140px;
     padding: 20px;
 }
 
 mat-card {
     max-height: 250px;
+}
+
+.longer-card {
+    padding-bottom: 40px;
 }

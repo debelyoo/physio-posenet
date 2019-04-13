@@ -5,8 +5,10 @@
 .exercise-video-card {
     max-width: 500px;
     margin: 2px;
+    top: 10px;
 }
 
 .exercise-record-card {
     margin: 2px;
+    top: 10px;
 }

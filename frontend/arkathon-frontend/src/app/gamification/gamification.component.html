@@ -1,13 +1,19 @@
 <div class="flexContainer">
   <div>
-    <h2>Score Over Time</h2>
-    <canvas baseChart
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
-      [options]="lineChartOptions"
-      [chartType]="lineChartType"
-      width="550px">
-    </canvas>
+    <mat-card class="extra-margin">
+      <mat-card-header>
+        <mat-card-title>Score Over Time</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [chartType]="lineChartType"
+          width="500px">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
   </div>
   <div class="flexContainer push-right">
     <mat-card class="extra-margin">
@@ -24,7 +30,7 @@
     </mat-card>
     <mat-card class="extra-margin">
       <mat-card-header>
-        <mat-card-title>Persistance Award</mat-card-title>
+        <mat-card-title>Tension Award</mat-card-title>
       </mat-card-header>
       <img mat-card-image src="https://cdn0.iconfinder.com/data/icons/gamification-flat-awards-and-badges/500/star13-512.png" alt="Award XYZ">
     </mat-card>
@@ -32,24 +38,36 @@
 </div>
 <div class="flexContainer">
   <div>
-    <h2>Exercise per Month</h2>
+    <mat-card class="extra-margin longer-card">
+      <mat-card-header>
+        <mat-card-title>Exercise per Month</mat-card-title>
+      </mat-card-header>
+    <mat-card-content>
     <canvas baseChart
       [datasets]="pieChartData"
       [labels]="pieChartLabels"
       [options]="pieChartOptions"
       [chartType]="pieChartType"
-      width="550px">
+      width="500px">
     </canvas>
+    </mat-card-content>
+  </mat-card>
   </div>
   <div>
-    <h2>Exercise Frequency</h2>
-    <canvas baseChart
-      [datasets]="barChartData"
-      [labels]="barChartLabels"
-      [options]="barChartOptions"
-      [chartType]="barChartType"
-      width="550px">
-    </canvas>
+    <mat-card class="extra-margin push-righter longer-card">
+      <mat-card-header>
+        <mat-card-title>Exercise Frequency</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [chartType]="barChartType"
+          width="500px">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
 
