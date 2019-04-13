@@ -2,7 +2,7 @@ import connexion
 import six
 
 from swagger_server import util
-from swagger_server.pose.electrode_handler import extract_bounding_boxes
+from swagger_server.pose.electrode_handler import extract_bounding_boxes, get_placement_image
 from flask import Response
 
 def add_electrode(file):  # noqa: E501
@@ -43,7 +43,7 @@ def get_image_by_electrode_id_and_index(electrodeId, index):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return get_placement_image(electrodeId, index)
 
 
 def validate_electrodes(electrodeId, file=None):  # noqa: E501

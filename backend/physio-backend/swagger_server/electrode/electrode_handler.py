@@ -60,3 +60,11 @@ def extract_bounding_boxes(file, save_bbox=True):
         print(e)
         session.rollback()
     return placement_id, bbox_string
+
+def get_placement_image(placement, index):
+    session = sessionmaker(bind=engine)()
+    try:
+        image = session.query(Placement).filter_by(placementid=placement, index=index).first()
+        return image
+    except Exception as e:
+        print(e)
