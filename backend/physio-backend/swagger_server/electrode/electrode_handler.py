@@ -9,11 +9,16 @@ import json
 from ..models.pose import Placement
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import gluoncv as gcv
 
 config = load_config("config.yml")
 db_folder = config["databaseDir"]
 os.makedirs(db_folder, exist_ok=True)
 engine = create_engine('sqlite:///' + db_folder +'/physio.sqlite')
+
+# load the model once
+net = gcv.model_zoo.get_model('ssd_512_mobilenet1.0_custom', classes=classes, pretrained_base=False)
+net.load_parameters('neural_net')
 
 # drop table at every boot of the application
 table_name = "placements"
@@ -45,11 +50,16 @@ def extract_bounding_boxes(file, save_bbox=False):
             # process the image
             nparr = np.fromstring(img_str, np.uint8)
             img_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            #
-            # TODO Get bounding boxes here if needed
-            #
+            
+            # get bounding boxes
+            x, image = gcv.data.transforms.presets.ssd.transform_test(imgs=[img_np], max_size=512)
+            cid, score, bbox = net(x)
+
             bbox_string = json.dumps({})
-            # TODO: save the draw_image and the key-points
+            
+            #return best bboxes
+            bboxes = [bbox[0][i] for i in range(len(score[0])) if score[0][i] > 0.7] # SLOW! NO TIME TO WRITE FAST
+
         index = 0 # fix index as long as we don't have video
         thumbnail_url = '/electrodes/{}/images/raw/{}'.format(placement_id, index)
         print('write to DB')
