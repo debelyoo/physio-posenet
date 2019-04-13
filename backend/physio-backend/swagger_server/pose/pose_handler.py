@@ -7,11 +7,16 @@ from .posenet.load_model import load_posenet_model
 from .posenet.utils import process_input, draw_skel_and_kp
 from .posenet.decode import decode_multiple_poses
 from .posenet.constants import PART_NAMES
+from ..util import load_config
 import tensorflow as tf
 
-db_folder = os.path.realpath('..') + "/db"
+
+
+config = load_config("config.yml")
+model_dir = config["modelDir"]
+db_folder = config["databaseDir"]
 os.makedirs(db_folder, exist_ok=True)
-engine = create_engine('sqlite:///'+ db_folder +'/physio.sqlite')
+engine = create_engine('sqlite:///' + db_folder +'/physio.sqlite')
 
 # drop table at every boot of the application
 table_name = "poses"
@@ -19,7 +24,7 @@ if not engine.dialect.has_table(engine.connect(), table_name):
     Pose.__table__.create(engine)
 
 # load the posenet model
-output_stride, model_outputs = load_posenet_model()
+output_stride, model_outputs = load_posenet_model(serve_dir=model_dir)
 
 
 def _get_scores(input_image):
@@ -42,11 +47,6 @@ def _get_scores(input_image):
                               output_stride=output_stride, max_pose_detections=10, min_pose_score=0.25)
 
     return pose_scores, keypoint_scores, keypoint_coords
-
-
-# load the posenet model
-output_stride, model_outputs = load_posenet_model()
-
 
 def _get_scores(input_image):
     """

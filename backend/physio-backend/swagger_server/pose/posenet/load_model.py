@@ -3,6 +3,7 @@
 """
 import yaml
 import os
+import logging
 
 import tensorflow as tf
 
@@ -62,6 +63,9 @@ def load_posenet_model(serve_dir=SERVE_DIR, pb_file_name=PB_FILE_NAME, config_fi
 
     # load the frozen model
     frozen_graph_path = os.path.join(serve_dir, pb_file_name)
+    print("plop")
+    print(frozen_graph_path)
+
     posnet_graph = _load_graph(frozen_graph_path)
 
     # create a temo session and retrieve the output nodes
