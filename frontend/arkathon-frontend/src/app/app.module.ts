@@ -11,13 +11,22 @@ import { PatientComponent } from './patient/patient.component';
 import { BackendServiceService } from './services/backend-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ExerciseComponent } from './exercise/exercise.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
+import {MatTableModule} from '@angular/material/table';
+import { ElectrodesComponent } from './electrodes/electrodes.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientComponent,
     CaptureCameraComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    ExerciseTableComponent,
+    ElectrodesComponent,
+    DoctorViewComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,10 @@ import { ExerciseComponent } from './exercise/exercise.component';
     AppRoutingModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule,
+    MatTableModule,
+    MatToolbarModule
   ],
   providers: [BackendServiceService],
   bootstrap: [AppComponent]

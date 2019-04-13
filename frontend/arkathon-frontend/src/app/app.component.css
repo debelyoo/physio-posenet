@@ -1,7 +1,7 @@
-.nav-button-row button {
+button {
     margin-right: 8px;
 }
 
-nav {
-    margin-bottom: 24px;
+mat-toolbar {
+    background-color: #B3E5FC;
 }

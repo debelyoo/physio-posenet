@@ -1,7 +1,10 @@
+<button class="mg-6" mat-raised-button color="primary" (click)="goToElectrodes()">Attach Electrodes</button>
 <div>
   <mat-card *ngFor="let p of pose" class="exercise-card">
     <mat-card-header>
-      <mat-card-title>{{p}}</mat-card-title>
+      <mat-card-title>
+        {{p}}
+      </mat-card-title>
     </mat-card-header>
     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Teaser of exercise 1">
     <mat-card-content>

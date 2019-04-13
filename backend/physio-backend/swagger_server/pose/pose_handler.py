@@ -9,11 +9,40 @@ from .posenet.decode import decode_multiple_poses
 from .posenet.constants import PART_NAMES
 import tensorflow as tf
 
-engine = create_engine('sqlite:////Users/jean.rossier/tools/arkathon/physio-posenet/db/physio.sqlite')
+db_folder = os.path.realpath('..') + "/db"
+os.makedirs(db_folder, exist_ok=True)
+engine = create_engine('sqlite:///'+ db_folder +'/physio.sqlite')
 
 # drop table at every boot of the application
-Pose.__table__.drop(engine)
-Pose.__table__.create(engine)
+table_name = "poses"
+if not engine.dialect.has_table(engine.connect(), table_name):
+    Pose.__table__.create(engine)
+
+# load the posenet model
+output_stride, model_outputs = load_posenet_model()
+
+
+def _get_scores(input_image):
+    """
+    
+    :param input_image              : 
+    :return: 
+    """
+    global output_stride, model_outputs
+
+    with tf.Session() as sess:
+        # feed the pre-processed image
+        heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = \
+            sess.run(model_outputs, feed_dict={'image:0': input_image})
+
+    # get the pose scores, key-point scores and their coordinates
+    pose_scores, keypoint_scores, keypoint_coords = \
+        decode_multiple_poses(heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0),
+                              displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0),
+                              output_stride=output_stride, max_pose_detections=10, min_pose_score=0.25)
+
+    return pose_scores, keypoint_scores, keypoint_coords
+
 
 # load the posenet model
 output_stride, model_outputs = load_posenet_model()

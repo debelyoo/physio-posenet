@@ -1,0 +1,24 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <!-- Date -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+  
+    <!-- Time of Exercise -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Exercise Time </th>
+      <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+    </ng-container>
+  
+    <!-- Mean Score -->
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef> Score [%] </th>
+      <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  

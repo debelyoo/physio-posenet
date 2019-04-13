@@ -13,12 +13,17 @@ const httpOptions = {
 })
 export class BackendServiceService {
 
-  private BASE_URL: string  = 'https://physio.test.sqooba.io/api/';
+  private BASE_URL = 'https://physio.test.sqooba.io/api/';
 
   constructor(private http: HttpClient) { }
 
-  getPoses(): Observable<any> {
+  getPoses (): Observable<any> {
     return this.http.get(
       this.BASE_URL + 'poses', httpOptions);
+  }
+
+  getOnePose (id: number): Observable<any> {
+    return this.http.get(
+      this.BASE_URL + 'poses/' + id.toString(), httpOptions);
   }
 }
