@@ -12,7 +12,7 @@ const source = timer(1, 1000);
 export class CaptureCameraComponent implements OnInit {
   @ViewChild('videoElement') videoElement: any;
   private video: any;
-  public videoOn = true;
+  public videoOn = false;
 
   public color = 'primary';
   public mode = 'determinate';
