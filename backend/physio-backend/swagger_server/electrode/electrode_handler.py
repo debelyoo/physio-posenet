@@ -20,7 +20,7 @@ table_name = "placements"
 if not engine.dialect.has_table(engine.connect(), table_name):
     Placement.__table__.create(engine)
 
-def extract_bounding_boxes(file, save_bbox=True):
+def extract_bounding_boxes(file, save_bbox=False):
     session = sessionmaker(bind=engine)()
     try:
         # create placement UUID
