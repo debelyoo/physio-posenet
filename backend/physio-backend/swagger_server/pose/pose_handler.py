@@ -28,11 +28,6 @@ if not engine.dialect.has_table(engine.connect(), table_name):
 # load the posenet model
 ts_session, output_stride, model_outputs = load_posenet_model(serve_dir=model_dir)
 
-class Coordinate():
-    def __init__(self, name, score, coordinates):
-        self.name = name
-        self.score = score
-        self.coordinates = coordinates
 
 def _get_scores(input_image):
     """
