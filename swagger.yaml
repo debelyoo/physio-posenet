@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 host: physio.test.sqooba.io
-basePath: /api
+basePath: /
 tags:
 - name: poses
   description: Everything about your poses
@@ -32,15 +32,27 @@ schemes:
 - https
 - http
 paths:
-  /front:
+  /{path}:
     get:
       tags:
-      - front
-      summary: Get the home page
+      - "front"
+      summary: "Get the home page"
+      operationId: "front_get"
+      parameters:
+      - name: "path"
+        in: "path"
+        description: "path of file"
+        required: true
+        type: "string"
+      produces:
+      - text/html; charset=utf-8
+      - text/javascript; charset=utf-8
+      - image/x-icon
       responses:
-        '200':
-          description: 'The home page'
-  /poses:
+        200:
+          description: "The home page"
+      x-swagger-router-controller: "swagger_server.controllers.front_controller"
+  /api/poses:
     post:
       tags:
       - poses
@@ -71,7 +83,7 @@ paths:
       responses:
         '200':
           description: 'All available poses'
-  /poses/{poseId}:
+  /api/poses/{poseId}:
     get:
       tags:
       - "poses"
@@ -98,7 +110,7 @@ paths:
           description: "Pose not found"
       security:
       - api_key: []
-  /poses/{poseId}/images/raw/{index}:
+  /api/poses/{poseId}/images/raw/{index}:
     get:
       tags:
       - "poses"
@@ -128,7 +140,7 @@ paths:
           description: "Pose not found"
       security:
       - api_key: []
-  /poses/{poseId}/images/skeleton/{index}:
+  /api/poses/{poseId}/images/skeleton/{index}:
     get:
       tags:
       - "poses"
@@ -158,7 +170,7 @@ paths:
           description: "Pose not found"
       security:
       - api_key: []
-  '/poses/{poseId}/check':
+  /api/poses/{poseId}/check:
     post:
       tags:
       - poses
@@ -183,7 +195,7 @@ paths:
       responses:
         '200':
           description: successful operation
-  /electrodes:
+  /api/electrodes:
     post:
       tags:
       - electrodes
@@ -214,7 +226,7 @@ paths:
       responses:
         '200':
           description: 'All available electrodes'
-  /electrodes/{electrodeId}/images/raw/{index}:
+  /api/electrodes/{electrodeId}/images/raw/{index}:
     get:
       tags:
       - "electrodes"
@@ -244,7 +256,7 @@ paths:
           description: "Electrode not found"
       security:
       - api_key: []
-  '/electrodes/{electrodeId}/check':
+  /api/electrodes/{electrodeId}/check:
     post:
       tags:
       - electrodes

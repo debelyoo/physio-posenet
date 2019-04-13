@@ -17,7 +17,7 @@ def add_electrode(file):  # noqa: E501
     return 'do some magic!'
 
 
-def electrodes_get():  # noqa: E501
+def api_electrodes_get():  # noqa: E501
     """Get all electrodes in the library
 
      # noqa: E501

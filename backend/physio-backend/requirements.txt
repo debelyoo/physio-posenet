@@ -10,7 +10,6 @@ Flask==1.0.2
 Flask-Cors==3.0.7
 gast==0.2.2
 grpcio==1.19.0
-h5py==2.9.0
 idna==2.8
 inflection==0.3.1
 itsdangerous==1.1.0

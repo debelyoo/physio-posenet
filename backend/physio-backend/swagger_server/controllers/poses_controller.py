@@ -37,7 +37,7 @@ def get_pose_by_id(poseId):  # noqa: E501
     return 'do some magic!'
 
 
-def poses_get():  # noqa: E501
+def api_poses_get():  # noqa: E501
     """Get all poses in the library
 
      # noqa: E501

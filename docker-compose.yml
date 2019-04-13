@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  httpd:
+    image: docker.sqooba.io/sqooba/httpd-for-sandboxes:latest
+    ports:
+    - "443:443"
+    networks:
+    - sandboxnet
+    volumes:
+    - httpd_certificates:/etc/letsencrypt
+    environment:
+    - DOMAINNAME=physio.test.sqooba.io
+    - BACKEND_HOST_AND_PORT=backend:8080
+    restart: unless-stopped
+
+  backend:
+    image: physioarkathon/physio-backend:0.1.0
+    ports:
+    - "8080"
+    networks:
+    - sandboxnet
+    container_name: backend
+    restart: unless-stopped
+
+networks:
+  sandboxnet:
+    driver: bridge
+
+volumes:
+  httpd_certificates:

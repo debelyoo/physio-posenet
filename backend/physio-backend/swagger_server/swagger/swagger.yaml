@@ -11,7 +11,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "physio.test.sqooba.io"
-basePath: "/api"
+basePath: "/"
 tags:
 - name: "poses"
   description: "Everything about your poses"
@@ -34,23 +34,32 @@ schemes:
 security:
 - api_key: []
 paths:
-  /front:
+  /{path}:
     get:
       tags:
       - "front"
       summary: "Get the home page"
       operationId: "front_get"
-      parameters: []
+      produces:
+      - "text/html; charset=utf-8"
+      - "text/javascript; charset=utf-8"
+      - "image/x-icon"
+      parameters:
+      - name: "path"
+        in: "path"
+        description: "path of file"
+        required: true
+        type: "string"
       responses:
         200:
           description: "The home page"
       x-swagger-router-controller: "swagger_server.controllers.front_controller"
-  /poses:
+  /api/poses:
     get:
       tags:
       - "poses"
       summary: "Get all poses in the library"
-      operationId: "poses_get"
+      operationId: "api_poses_get"
       produces:
       - "application/json"
       parameters: []
@@ -80,7 +89,7 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "swagger_server.controllers.poses_controller"
-  /poses/{poseId}:
+  /api/poses/{poseId}:
     get:
       tags:
       - "poses"
@@ -108,7 +117,7 @@ paths:
       security:
       - api_key: []
       x-swagger-router-controller: "swagger_server.controllers.poses_controller"
-  /poses/{poseId}/images/raw/{index}:
+  /api/poses/{poseId}/images/raw/{index}:
     get:
       tags:
       - "poses"
@@ -139,7 +148,7 @@ paths:
       security:
       - api_key: []
       x-swagger-router-controller: "swagger_server.controllers.poses_controller"
-  /poses/{poseId}/images/skeleton/{index}:
+  /api/poses/{poseId}/images/skeleton/{index}:
     get:
       tags:
       - "poses"
@@ -170,7 +179,7 @@ paths:
       security:
       - api_key: []
       x-swagger-router-controller: "swagger_server.controllers.poses_controller"
-  /poses/{poseId}/check:
+  /api/poses/{poseId}/check:
     post:
       tags:
       - "poses"
@@ -197,12 +206,12 @@ paths:
         200:
           description: "successful operation"
       x-swagger-router-controller: "swagger_server.controllers.poses_controller"
-  /electrodes:
+  /api/electrodes:
     get:
       tags:
       - "electrodes"
       summary: "Get all electrodes in the library"
-      operationId: "electrodes_get"
+      operationId: "api_electrodes_get"
       produces:
       - "application/json"
       parameters: []
@@ -233,7 +242,7 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "swagger_server.controllers.electrodes_controller"
-  /electrodes/{electrodeId}/images/raw/{index}:
+  /api/electrodes/{electrodeId}/images/raw/{index}:
     get:
       tags:
       - "electrodes"
@@ -264,7 +273,7 @@ paths:
       security:
       - api_key: []
       x-swagger-router-controller: "swagger_server.controllers.electrodes_controller"
-  /electrodes/{electrodeId}/check:
+  /api/electrodes/{electrodeId}/check:
     post:
       tags:
       - "electrodes"
