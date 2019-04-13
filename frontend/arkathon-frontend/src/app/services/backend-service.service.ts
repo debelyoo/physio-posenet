@@ -17,8 +17,13 @@ export class BackendServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getPoses(): Observable<any> {
+  getPoses (): Observable<any> {
     return this.http.get(
       this.BASE_URL + 'poses', httpOptions);
+  }
+
+  getOnePose (id: number): Observable<any> {
+    return this.http.get(
+      this.BASE_URL + 'poses/' + id.toString(), httpOptions);
   }
 }
