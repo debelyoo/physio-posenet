@@ -1,0 +1,2 @@
+modelDir: "/Users/apagano/Desktop/Sqooba/sqooba/arkathon/physio-posenet/backend/physio-backend/swagger_server/pose/posenet/served_model"
+databaseDir: "../db/"

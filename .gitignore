@@ -24,5 +24,6 @@ dist/
 
 venv3
 venv
-
+.DS_Store
+**.sqlite
 

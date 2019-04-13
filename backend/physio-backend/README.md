@@ -11,7 +11,10 @@ This example uses the [Connexion](https://github.com/zalando/connexion) library 
 Python 3.5.2+
 
 ## Usage
-To run the server, please execute the following from the root directory:
+To run the server, first modify `config.yml` with the *absolute* path to
+the directory containing the posenet protobuff model files (`modelDir`) and
+the absolute or relative path to the directory that should store the sqlite
+db (`databaseDir`). Then, please execute the following from the root directory:
 
 ```
 pip3 install -r requirements.txt

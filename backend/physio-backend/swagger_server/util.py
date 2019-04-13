@@ -2,6 +2,7 @@ import datetime
 
 import six
 import typing
+import yaml
 
 
 def _deserialize(data, klass):
@@ -139,3 +140,7 @@ def _deserialize_dict(data, boxed_type):
     """
     return {k: _deserialize(v, boxed_type)
             for k, v in six.iteritems(data)}
+
+def load_config(config_path):
+    with open(config_path, "r") as fd:
+        return yaml.full_load(fd)
