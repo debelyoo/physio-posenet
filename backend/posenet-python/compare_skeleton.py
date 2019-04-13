@@ -1,6 +1,7 @@
 import posenet.constants
 import numpy as np
 import numpy.linalg as la
+from math import atan2, degrees
 
 skeleton_ref = {"nose": (0.9962466359138489, 148.35870453, 180.41607903),
             "leftEye": (0.9963536262512207, 139.87018601, 188.4293473),
@@ -38,4 +39,17 @@ skeleton_reading = {"nose": (0.9978408217430115, 178.36749079, 186.77125158),
                     "leftAnkle": (0.6144176721572876, 410.36916435, 220.25930994),
                     "rightAnkle": (0.9289039373397827, 411.08232827, 163.30428101)}
 
-#print(skeleton_reading)
+
+def angle_between_matching_parts(reference_part, reading_part):
+    """ get angle between reference part and reading part
+        returns angle difference between reference and reading part"""
+
+    # calculate angle of part inclination
+    part_ref_angle = atan2(abs(reference_part[0][2] - reference_part[1][2]),
+                           abs(reference_part[0][1] - reference_part[1][1]))
+
+    part_read_angle = atan2(abs(reading_part[0][2] - reading_part[1][2]),
+                            abs(reading_part[0][1] - reading_part[1][1]))
+
+    angle_diff = part_ref_angle - part_read_angle
+    return angle_diff
