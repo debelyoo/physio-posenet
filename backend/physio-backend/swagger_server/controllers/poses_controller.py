@@ -4,13 +4,7 @@ import six
 from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
 from flask import Response
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-import uuid
-from ..models.pose import Pose
-
-engine = create_engine('sqlite:////Users/jean.rossier/tools/arkathon/physio-posenet/db/physio.sqlite')
-Pose.__table__.create(engine)
+from swagger_server.pose.pose_handler import save_pose
 
 def add_pose(file):  # noqa: E501
     """Add a new pose to the library
@@ -23,17 +17,9 @@ def add_pose(file):  # noqa: E501
     :rtype: None
     """
 
-    session = sessionmaker(bind=engine)()
-    try:
-        pose_uuid = str(uuid.uuid4())
-        pose = Pose(uuid=pose_uuid, keypoints='x,x,x')
-        session.add(pose)
-        session.commit()
-    except Exception as e:
-        print(e)
-        session.rollback()
+    pose_uuid = save_pose(file)
 
-    return Response("{'message':'Pose uploaded !'}", status=201, mimetype='application/json')
+    return Response("{'message':'Pose uploaded !', 'id': pose_uuid}", status=201, mimetype='application/json')
 
 
 def get_pose_by_id(poseId):  # noqa: E501
