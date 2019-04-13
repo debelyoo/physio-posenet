@@ -97,7 +97,7 @@ def validate_pose(poseId, file=None):  # noqa: E501
     :param file: image of the pose to validate
     :type file: werkzeug.datastructures.FileStorage
 
-    :rtype: None
+    :rtype: dict
     """
 
     # from patient
@@ -105,8 +105,9 @@ def validate_pose(poseId, file=None):  # noqa: E501
     image = get_image(poseId)
     # from doctor
     reference_keypoints = json.loads(image.keypoints)
+    matched_skeleton = compare_skeleton(reference_keypoints, keypoints)
 
-    return 'do some magic!'
+    return matched_skeleton
 
 def get_image_by_pose_id_and_index(poseId, index):  # noqa: E501
     """Find image for a pose by index
