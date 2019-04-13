@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import uuid
 from ..models.pose import Pose
+from ..models.pose import Image
 from .posenet.load_model import load_posenet_model
 from .posenet.utils import process_input, draw_skel_and_kp
 from .posenet.decode import decode_multiple_poses
@@ -18,12 +19,13 @@ config = load_config("config.yml")
 model_dir = config["modelDir"]
 db_folder = config["databaseDir"]
 os.makedirs(db_folder, exist_ok=True)
-engine = create_engine('sqlite:///' + db_folder +'/physio.sqlite')
+engine = create_engine('sqlite:///' + db_folder +'/physio2.sqlite')
 
 # drop table at every boot of the application
 table_name = "poses"
 if not engine.dialect.has_table(engine.connect(), table_name):
     Pose.__table__.create(engine)
+    Image.__table__.create(engine)
 
 # load the posenet model
 ts_session, output_stride, model_outputs = load_posenet_model(serve_dir=model_dir)
@@ -90,10 +92,15 @@ def extract_keypoints(file, persist=True):
 
             json_string = json.dumps(key_point_dict)
             # TODO: save the draw_image and the key-points
-            thumbnail_url = '/poses/'+ pose_uuid +'/images/raw/' + index
+            index = 0 # fix index as long as we don't have video
+            thumbnail_url = '/poses/{}/images/raw/{}'.format(pose_uuid, index)
+            print(thumbnail_url)
             if persist:
+                print('write to DB')
                 pose = Pose(poseid=pose_uuid, name='', thumbnail=thumbnail_url)
+                image = Image(poseid=pose_uuid, keypoints=json_string, index=index)
                 session.add(pose)
+                session.add(image)
                 session.commit()
     except Exception as e:
         print(e)
