@@ -14,6 +14,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
 import {MatTableModule} from '@angular/material/table';
+import { ElectrodesComponent } from './electrodes/electrodes.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MatTableModule} from '@angular/material/table';
     PatientComponent,
     CaptureCameraComponent,
     ExerciseComponent,
-    ExerciseTableComponent
+    ExerciseTableComponent,
+    ElectrodesComponent
   ],
   imports: [
     BrowserModule,

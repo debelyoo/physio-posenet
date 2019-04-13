@@ -29,6 +29,10 @@ export class PatientComponent implements OnInit, OnDestroy {
     this.router.navigate(['exercise/' + id]);
   }
 
+  public goToElectrodes () {
+    this.router.navigate(['electrodes']);
+  }
+
   ngOnDestroy () {
     if (this.serviceSubscription) {
       this.serviceSubscription.unsubscribe();

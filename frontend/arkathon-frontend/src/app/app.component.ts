@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor (private router: Router) {
 
+  constructor (private router: Router,
+    private _location: Location) {
   }
-  openPatientPage() {
+
+  openPatientPage () {
     this.router.navigate(['patient']);
+  }
+
+  goBack () {
+    this._location.back();
   }
 }

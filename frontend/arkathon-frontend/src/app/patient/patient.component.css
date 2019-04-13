@@ -1,3 +1,7 @@
 .exercise-card {
     max-width: 400px;
 }
+
+.mg-6 {
+    margin: 6px;
+}
