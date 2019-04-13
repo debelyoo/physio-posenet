@@ -7,7 +7,7 @@ from .posenet.load_model import load_posenet_model
 from .posenet.utils import process_input, draw_skel_and_kp
 from .posenet.decode import decode_multiple_poses
 from .posenet.constants import PART_NAMES
-from ..util import load_config
+from ..physio_utils import load_config
 import json
 import cv2
 import numpy as np
