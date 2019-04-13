@@ -1,20 +1,7 @@
-.nav-button-row {
-    float: right;
-}
-
-.nav-button-row button {
+button {
     margin-right: 8px;
 }
 
-.navigation nav {
-    width: 100%;
-}
-
-nav div button:first-child { 
-    float: left; 
-}
-
-main {
-    position: fixed;
-    top: 48px;
+mat-toolbar {
+    background-color: #B3E5FC;
 }

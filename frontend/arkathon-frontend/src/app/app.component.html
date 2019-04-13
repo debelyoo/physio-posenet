@@ -1,12 +1,14 @@
-<nav class="navigation">
-  <div>
-      <button mat-button (click)="goBack()">Back</button>
-  </div>
-  <div class="nav-button-row">
-    <button mat-raised-button>Doctor</button>
-    <button mat-raised-button (click)="openPatientPage()">Patient</button>
-  </div>
-</nav>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <div>
+            <button mat-button (click)="goBack()">Back</button>
+        </div>
+        <div class="nav-button-row">
+          <button mat-raised-button>Doctor</button>
+          <button mat-raised-button (click)="openPatientPage()">Patient</button>
+        </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 <main>
   <router-outlet></router-outlet>
 </main>

@@ -15,6 +15,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ExerciseTableComponent } from './exercise-table/exercise-table.component';
 import {MatTableModule} from '@angular/material/table';
 import { ElectrodesComponent } from './electrodes/electrodes.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ElectrodesComponent } from './electrodes/electrodes.component';
     MatCheckboxModule,
     MatCardModule,
     MatProgressBarModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ],
   providers: [BackendServiceService],
   bootstrap: [AppComponent]
