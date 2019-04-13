@@ -9,6 +9,7 @@ class Pose(Base):
     poseid = Column(String(50))
     name = Column(String(50))
     thumbnail = Column(String(500))
+    thumbnail_with_skeleton = Column(String(500))
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

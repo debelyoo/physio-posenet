@@ -8,6 +8,8 @@ from swagger_server.pose.pose_handler import extract_keypoints, get_image, get_p
 from flask import send_file
 from ..physio_utils import load_config
 import json
+from ..physio_utils import load_config
+from flask import send_file
 
 
 CONNECTED_PART_NAMES = [
@@ -155,4 +157,9 @@ def get_image_with_skeleton_by_pose_id_and_index(poseId, index):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    image = get_image(poseId)
+
+    config = load_config("config.yml")
+    pose_folder = model_dir = config["poseFolder"]
+    filename = '{}/processed/{}{}'.format(pose_folder, poseId, image.extension)
+    return send_file(filename, mimetype='image/png')
