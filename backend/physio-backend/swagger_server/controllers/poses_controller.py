@@ -67,6 +67,13 @@ def validate_pose(poseId, file=None):  # noqa: E501
 
     :rtype: None
     """
+
+    # from patient
+    _, keypoints = extract_keypoints(file, False)
+    image = get_image(poseId)
+    # from doctor
+    reference_keypoints = json.loads(image.keypoints)
+
     return 'do some magic!'
 
 def get_image_by_pose_id_and_index(poseId, index):  # noqa: E501

@@ -25,6 +25,9 @@ engine = create_engine('sqlite:///' + db_folder +'/physio.sqlite')
 table_name = "poses"
 if not engine.dialect.has_table(engine.connect(), table_name):
     Pose.__table__.create(engine)
+
+im_table_name = 'images'
+if not engine.dialect.has_table(engine.connect(), im_table_name):
     Image.__table__.create(engine)
 
 # load the posenet model
