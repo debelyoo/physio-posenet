@@ -19,7 +19,7 @@ config = load_config("config.yml")
 model_dir = config["modelDir"]
 db_folder = config["databaseDir"]
 os.makedirs(db_folder, exist_ok=True)
-engine = create_engine('sqlite:///' + db_folder +'/physio2.sqlite')
+engine = create_engine('sqlite:///' + db_folder +'/physio.sqlite')
 
 # drop table at every boot of the application
 table_name = "poses"
@@ -59,10 +59,11 @@ def extract_keypoints(file, persist=True):
 
         # save file to disk
         filename, file_extension = os.path.splitext(file.filename)
-        pose_folder = "/tmp/physio/poses"
+        pose_folder = model_dir = config["poseFolder"]
         filename_uuid = pose_uuid + file_extension
         if file and persist:
-            fullPath = os.path.join(pose_folder, filename_uuid)
+            raw_folder = os.path.join(pose_folder, 'raw')
+            fullPath = os.path.join(raw_folder, filename_uuid)
             os.makedirs(os.path.dirname(fullPath), exist_ok=True)
             file.save(fullPath)
 
@@ -98,7 +99,7 @@ def extract_keypoints(file, persist=True):
             if persist:
                 print('write to DB')
                 pose = Pose(poseid=pose_uuid, name='', thumbnail=thumbnail_url)
-                image = Image(poseid=pose_uuid, keypoints=json_string, index=index)
+                image = Image(poseid=pose_uuid, keypoints=json_string, extension=file_extension, index=index)
                 session.add(pose)
                 session.add(image)
                 session.commit()
@@ -108,3 +109,12 @@ def extract_keypoints(file, persist=True):
             session.rollback()
 
     return pose_uuid, json_string
+
+def get_image(poseId):
+    session = sessionmaker(bind=engine)()
+    try:
+        image = session.query(Image).filter_by(poseid=poseId).first()
+
+        return image
+    except Exception as e:
+        print(e)

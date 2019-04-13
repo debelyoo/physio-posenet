@@ -17,6 +17,7 @@ class Image(Base):
     __tablename__ = 'images'
     id = Column(Integer, Sequence('image_id_seq'), primary_key=True)
     poseid = Column(String(50))
+    extension = Column(String(50))
     keypoints = Column(String(500))
     index = Integer
 
