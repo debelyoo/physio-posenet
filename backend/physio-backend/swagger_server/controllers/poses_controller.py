@@ -1,5 +1,7 @@
 import connexion
 import six
+from math import atan2, degrees
+import posenet.constants
 
 from swagger_server.models.tag import Tag  # noqa: E501
 from swagger_server import util
@@ -8,6 +10,36 @@ from swagger_server.pose.pose_handler import extract_keypoints, get_image, get_p
 from flask import send_file
 from ..physio_utils import load_config
 import json
+
+
+def angle_between_matching_parts(reference_part, reading_part):
+    """ get angle between reference part and reading part
+        returns angle difference between reference and reading part"""
+
+    # calculate angle of part inclination
+    part_ref_angle = atan2(abs(reference_part[0][2] - reference_part[1][2]),
+                           abs(reference_part[0][1] - reference_part[1][1]))
+
+    part_read_angle = atan2(abs(reading_part[0][2] - reading_part[1][2]),
+                            abs(reading_part[0][1] - reading_part[1][1]))
+
+    angle_diff = part_ref_angle - part_read_angle
+    return angle_diff
+
+
+def compare_skeleton(skeleton_reference, skeleton_reading):
+    """ iterate over all body parts and check the angle differences
+        between reference and reading parts """
+    skeleton_matched = {}
+    for body_part in posenet.CONNECTED_PART_NAMES:
+        reference_part = (skeleton_reference[body_part[0]],
+                          skeleton_reference[body_part[1]])
+        reading_part = (skeleton_reading[body_part[0]],
+                        skeleton_reading[body_part[1]])
+        angle_diff = angle_between_matching_parts(reference_part, reading_part)
+        skeleton_matched[body_part] = degrees(angle_diff)
+    return skeleton_matched
+
 
 def add_pose(file):  # noqa: E501
     """Add a new pose to the library
