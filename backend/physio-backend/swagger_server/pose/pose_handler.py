@@ -25,6 +25,9 @@ engine = create_engine('sqlite:///' + db_folder +'/physio.sqlite')
 table_name = "poses"
 if not engine.dialect.has_table(engine.connect(), table_name):
     Pose.__table__.create(engine)
+
+im_table_name = 'images'
+if not engine.dialect.has_table(engine.connect(), im_table_name):
     Image.__table__.create(engine)
 
 # load the posenet model
@@ -74,6 +77,7 @@ def extract_keypoints(file, persist=True):
         # process the image
         nparr = np.fromstring(img_str, np.uint8)
         img_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        img_np = cv2.resize(img_np, (360, 480))
         input_image, draw_image, output_scale = process_input(img_np, output_stride=output_stride)
         # get the scores and the coordinates
         pose_scores, keypoint_scores, keypoint_coords = _get_scores(input_image)
@@ -86,6 +90,12 @@ def extract_keypoints(file, persist=True):
             draw_image = draw_skel_and_kp(draw_image, pose_scores, keypoint_scores, keypoint_coords,
                                           min_pose_score=0.25, min_part_score=0.25)
 
+            pose_folder = "/tmp/physio/poses/processed"
+            filename_uuid = pose_uuid + file_extension
+            if file and persist:
+                fullPath = os.path.join(pose_folder, filename_uuid)
+                os.makedirs(os.path.dirname(fullPath), exist_ok=True)
+                cv2.imwrite(fullPath, draw_image)
             # save the name of the key-point, its score and coordinates
             key_point_dict = {}
             for ki, (s, c) in enumerate(zip(keypoint_scores[0, :], keypoint_coords[0, :, :])):
@@ -95,10 +105,11 @@ def extract_keypoints(file, persist=True):
             # TODO: save the draw_image and the key-points
             index = 0 # fix index as long as we don't have video
             thumbnail_url = '/poses/{}/images/raw/{}'.format(pose_uuid, index)
+            thumbnail_url_with_skeleton = '/poses/{}/images/processed/{}'.format(pose_uuid, index)
             print(thumbnail_url)
             if persist:
                 print('write to DB')
-                pose = Pose(poseid=pose_uuid, name='', thumbnail=thumbnail_url)
+                pose = Pose(poseid=pose_uuid, name='', thumbnail=thumbnail_url, thumbnail_with_skeleton=thumbnail_url_with_skeleton)
                 image = Image(poseid=pose_uuid, keypoints=json_string, extension=file_extension, index=index)
                 session.add(pose)
                 session.add(image)
