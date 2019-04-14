@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } fr
 import { BackendServiceService } from '../services/backend-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-exercise',
@@ -19,7 +19,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   public videoOn = false;
   public interval;
 
-  public IWILLNEVERMERGETHATSHIT;
+  public picture;
 
   @ViewChild("canvas")
   public canvas: ElementRef;
@@ -33,7 +33,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     this.video = this.videoElement.nativeElement;
     this.backendSubscription = this.backendService.getPoses()
       .subscribe((pose) => {
-      this.IWILLNEVERMERGETHATSHIT = this.URL + pose[0].thumbnail
+      this.picture = this.URL + pose[0].thumbnail
     });
   }
 

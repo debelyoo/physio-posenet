@@ -27,8 +27,8 @@ export class BackendServiceService {
       this.BASE_URL + 'poses/' + id.toString(), httpOptions);
   }
 
-  getPicture (): Observable<any> {
+  /* getPicture (): Observable<any> {
     return this.http.get(
       this.BASE_URL + 'PIRCTURE_ENDPOINT', httpOptions);
-  }
+  } */
 }
