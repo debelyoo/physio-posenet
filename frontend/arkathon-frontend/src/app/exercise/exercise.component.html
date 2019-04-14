@@ -15,6 +15,7 @@
   <mat-card class="exercise-record-card">
     <mat-card-header>
       <mat-card-title>Take Image</mat-card-title>
+      <div [ngStyle]="divStyle">{{debugValue}} {{debugValue2}}</div>
     </mat-card-header>
     <video #videoElement></video>
     <canvas #canvas id="canvas" width="640" height="480"></canvas>

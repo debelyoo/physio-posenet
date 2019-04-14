@@ -22,6 +22,15 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   public picture;
   private poseId;
 
+  divStyle = {
+    'background-color': '#fff',
+    'height': '50px',
+    'width': '100px'
+  };
+
+  public debugValue = 0;
+  public debugValue2 = 0;
+
   @ViewChild('canvas')
   public canvas: ElementRef;
 
@@ -55,8 +64,8 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       const formData = new FormData();
       formData.append('file', file);
       this.http.post(this.URL + "/poses/" + this.poseId + '/check', formData)
-      .subscribe((response) => console.log(response));
-    }, 2000);
+      .subscribe((response) => this.checkGoodness(response));
+    }, 1000);
   }
 
   private initCamera (config: any) {
@@ -83,16 +92,18 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     }
   }
 
-  public getStyle() {
-    return {
-      'color': '#fff',
-      'height': '10px',
-      'width': '10px'
-    };
+  private setStyle (response) {
+    if (response === 'good') {
+      return this.divStyle["background-color"] = '#4CAF50';
+    } else if (response === 'bad') {
+      return this.divStyle["background-color"] = '#FF5252';
+    }
   }
 
-  private setStyle (response) {
-
+  private checkGoodness (res) {
+    this.debugValue = Math.abs(res['rightElbow, rightShoulder']);
+    this.debugValue2 = Math.abs(res['rightElbow, rightWrist']);
+    return (Math.abs(res['rightElbow, rightShoulder']) <= 20 && Math.abs(res['rightElbow, rightWrist']) <= 20) ? this.setStyle('good'): this.setStyle('bad');
   }
 
 }
