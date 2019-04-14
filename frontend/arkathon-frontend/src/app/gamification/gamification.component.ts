@@ -21,7 +21,7 @@ export class GamificationComponent implements OnInit {
         },
         scaleLabel: {
           display: true,
-                    
+
         }
       }],
       yAxes: [
@@ -38,7 +38,7 @@ export class GamificationComponent implements OnInit {
   public lineChartLabels: Label[] = ['02.02.2019', '15.02.2019', '05.03.2019', '06.03.2019', '10.03.2019', '28.03.2019', '10.04.2019'];
 
   public lineChartData: ChartDataSets[] = [
-    { 
+    {
       data: [
         65, 59, 80, 81, 56, 55, 40
       ],
@@ -60,7 +60,7 @@ export class GamificationComponent implements OnInit {
         },
         scaleLabel: {
           display: true,
-                    
+
         }
       }],
       yAxes: [
@@ -77,7 +77,7 @@ export class GamificationComponent implements OnInit {
   public barChartLabels: Label[] = ['Exercise 1', 'Exercise 2', 'Exercise 3', 'Exercise 4', 'Exercise 5', 'Exercise 6', 'Exercise 7'];
 
   public barChartData: ChartDataSets[] = [
-    { 
+    {
       data: [
         5, 4, 18, 3, 25, 12, 10
       ],
@@ -98,7 +98,7 @@ export class GamificationComponent implements OnInit {
         }
       ],
       yAxes: [
-        { 
+        {
           display: false
         }
       ]
@@ -108,7 +108,7 @@ export class GamificationComponent implements OnInit {
   public pieChartType: ChartType = 'doughnut';
   public pieChartLabels: Label[] = ['January 19', 'February 19', 'March 19', 'December 18', 'June 18', 'August 18', 'November 18'];
   public pieChartData: ChartDataSets[] = [
-    { 
+    {
       data: [
         5, 4, 18, 3, 25, 12, 10
       ],

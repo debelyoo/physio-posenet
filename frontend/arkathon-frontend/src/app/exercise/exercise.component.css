@@ -22,4 +22,5 @@
 
 img {
     max-width: 300px;
+    transform: rotateY(180deg);
 }

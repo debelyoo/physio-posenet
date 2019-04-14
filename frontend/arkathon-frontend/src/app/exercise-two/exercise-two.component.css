@@ -23,3 +23,7 @@
 img {
     max-width: 300px;
 }
+
+.mirror {
+    transform: rotateY(180deg);
+}

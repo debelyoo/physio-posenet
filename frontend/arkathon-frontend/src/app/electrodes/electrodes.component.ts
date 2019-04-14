@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BackendServiceService } from '../services/backend-service.service';
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './electrodes.component.html',
   styleUrls: ['./electrodes.component.css']
 })
-export class ElectrodesComponent implements OnInit {
+export class ElectrodesComponent implements OnInit, OnDestroy {
 
   private URL = 'https://physio.test.sqooba.io/api/PICTURE_ENDPOINT/';
   private readonly routeSubscription: Subscription;
@@ -28,11 +28,6 @@ export class ElectrodesComponent implements OnInit {
   constructor (private route: ActivatedRoute,
     private backendService: BackendServiceService,
     private http: HttpClient) {
-      /* this. backendSubscription = backendService.getPicture()
-      .subscribe(
-        (pose) => {
-          this.picture = pose;
-      }); */
    }
 
   ngOnInit () {
@@ -42,12 +37,12 @@ export class ElectrodesComponent implements OnInit {
   public record() {
     this.initCamera({ video: true, audio: false });
     this.interval = setInterval(() => {
-      let ctx = this.canvas2.nativeElement.getContext('2d');
+      const ctx = this.canvas2.nativeElement.getContext('2d');
       ctx.drawImage(this.video2, 0, 0, this.canvas2.nativeElement.width, this.canvas2.nativeElement.height);
-      let img = new Image();
-      img.src = this.canvas2.nativeElement.toDataURL("image/png");
+      const img = new Image();
+      img.src = this.canvas2.nativeElement.toDataURL('image/png');
       /* this.http.post(this.URL + 1337 + "/check", img).subscribe(() => console.log(1)); */
-    }, 1000)
+    }, 1000);
   }
 
   private initCamera (config: any) {

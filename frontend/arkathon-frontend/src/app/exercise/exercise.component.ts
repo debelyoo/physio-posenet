@@ -21,7 +21,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
 
   public picture;
 
-  @ViewChild("canvas")
+  @ViewChild('canvas')
   public canvas: ElementRef;
 
   constructor (private route: ActivatedRoute,
@@ -33,19 +33,19 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     this.video = this.videoElement.nativeElement;
     this.backendSubscription = this.backendService.getPoses()
       .subscribe((pose) => {
-      this.picture = this.URL + pose[0].thumbnail
+      this.picture = this.URL + pose[0].thumbnail;
     });
   }
 
   public takePicture() {
     this.initCamera({ video: true, audio: false });
     this.interval = setInterval(() => {
-      let ctx = this.canvas.nativeElement.getContext('2d');
+      const ctx = this.canvas.nativeElement.getContext('2d');
       ctx.drawImage(this.video, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-      let img = new Image();
-      img.src = this.canvas.nativeElement.toDataURL("image/png");
-      this.http.post(this.URL + 1337 + "/check", img).subscribe(() => console.log(1));
-    }, 1000)
+      const img = new Image();
+      img.src = this.canvas.nativeElement.toDataURL('image/png');
+      this.http.post(this.URL + 1337 + '/check', img).subscribe(() => console.log(1));
+    }, 1000);
   }
 
   private initCamera (config: any) {
