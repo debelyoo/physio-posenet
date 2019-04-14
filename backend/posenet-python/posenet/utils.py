@@ -31,6 +31,7 @@ def read_cap(cap, scale_factor=1.0, output_stride=16):
 
 def read_imgfile(path, scale_factor=1.0, output_stride=16):
     img = cv2.imread(path)
+    img = cv2.resize(img,(370, 520))
     return _process_input(img, scale_factor, output_stride)
 
 
@@ -97,5 +98,6 @@ def draw_skel_and_kp(
     out_img = cv2.drawKeypoints(
         out_img, cv_keypoints, outImage=np.array([]), color=(255, 255, 0),
         flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    #print(adjacent_keypoints)
     out_img = cv2.polylines(out_img, adjacent_keypoints, isClosed=False, color=(255, 255, 0))
     return out_img
