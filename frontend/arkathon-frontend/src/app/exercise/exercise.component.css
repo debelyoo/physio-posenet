@@ -13,8 +13,9 @@
     top: 10px;
 }
 
-#video {
+video {
     background-color: #000000;
+    transform: rotateY(180deg);
 }
 #canvas {
     display: none;
@@ -22,5 +23,4 @@
 
 img {
     max-width: 300px;
-    transform: rotateY(180deg);
 }
