@@ -20,6 +20,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
   public interval;
 
   public picture;
+  private poseId;
 
   @ViewChild('canvas')
   public canvas: ElementRef;
@@ -34,6 +35,7 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     this.backendSubscription = this.backendService.getPoses()
       .subscribe((pose) => {
       this.picture = this.URL + pose[0].thumbnail;
+      this.poseId = pose[0].poseid;
     });
   }
 
@@ -44,7 +46,8 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       ctx.drawImage(this.video, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
       const img = new Image();
       img.src = this.canvas.nativeElement.toDataURL('image/png');
-      this.http.post(this.URL + 1337 + '/check', img).subscribe(() => console.log(1));
+      this.http.post(this.URL + "/poses/" + this.poseId + '/check', img)
+      .subscribe((response) => console.log(response));
     }, 1000);
   }
 
