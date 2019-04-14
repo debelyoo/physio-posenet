@@ -46,9 +46,17 @@ export class ExerciseComponent implements OnInit, OnDestroy {
       ctx.drawImage(this.video, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
       const img = new Image();
       img.src = this.canvas.nativeElement.toDataURL('image/png');
-      this.http.post(this.URL + "/poses/" + this.poseId + '/check', img)
+      let blobBin = atob(img.src.split(',')[1]);
+      let ia = new Uint8Array(blobBin.length);
+      for (let i = 0; i < blobBin.length; i++) {
+          ia[i] = blobBin.charCodeAt(i);
+      }
+      let file = new Blob([ia], {type: 'image/png'});
+      const formData = new FormData();
+      formData.append('file', file);
+      this.http.post(this.URL + "/poses/" + this.poseId + '/check', formData)
       .subscribe((response) => console.log(response));
-    }, 1000);
+    }, 2000);
   }
 
   private initCamera (config: any) {
@@ -73,6 +81,18 @@ export class ExerciseComponent implements OnInit, OnDestroy {
     if (this.backendSubscription) {
       this.backendSubscription.unsubscribe();
     }
+  }
+
+  public getStyle() {
+    return {
+      'color': '#fff',
+      'height': '10px',
+      'width': '10px'
+    };
+  }
+
+  private setStyle (response) {
+
   }
 
 }
