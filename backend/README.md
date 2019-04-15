@@ -1,8 +1,11 @@
-### Original repos:
+# Physio PoseNet - backend
+The backend of the application
 
-* [https://github.com/rwightman/posenet-python](https://github.com/rwightman/posenet-python)
+### References
 
-* [https://github.com/arnauvc/perceive2perfect](https://github.com/arnauvc/perceive2perfect)
+* posenet-python - [https://github.com/rwightman/posenet-python](https://github.com/rwightman/posenet-python)
 
-* [https://github.com/miguelgrinberg/flask-video-streaming](https://github.com/miguelgrinberg/flask-video-streaming)
+* perceive2perfect - [https://github.com/arnauvc/perceive2perfect](https://github.com/arnauvc/perceive2perfect)
+
+* flask-video-streaming - [https://github.com/miguelgrinberg/flask-video-streaming](https://github.com/miguelgrinberg/flask-video-streaming)
 
