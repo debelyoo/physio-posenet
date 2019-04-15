@@ -1,10 +1,12 @@
 # Physio PoseNet
 Real-time pose validation for physiotherapy exercises using pre-trained TensorFlow.js model PoseNet
 
-## Contents
-__frontend__ - the code for the application frontend (Javascript)
+This application has been developed during [Arkathon 2019](https://innoboard.ch/arkathon/hhvalais2019)
 
-__backend__ - the code for the application backend (Python)  
+## Contents
+__frontend/arkathon-frontend__ - the code for the application frontend (Javascript)
+
+__backend/physio-backend__ - the code for the application backend (Python)  
 
 ## Deploy
 
