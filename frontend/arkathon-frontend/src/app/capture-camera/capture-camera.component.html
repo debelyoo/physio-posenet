@@ -3,22 +3,3 @@
   <button class="mg-2" (click)="start()" mat-raised-button>Play</button>
   <button class="mg-2" (click)="stop()" mat-raised-button>Stop</button>
 </div>
-<div *ngIf="videoOn">
-  <div class="mg-6">
-    Progress:
-    <mat-progress-bar
-      class="example-margin"
-      [color]="color"
-      [mode]="mode"
-      [value]="value">
-    </mat-progress-bar>
-  </div>
-  <div class="mg-6">
-    Time:
-    <label>{{tick}}</label>
-  </div> 
-  <div class="mg-6">
-    Count:
-    <label>{{count}}</label>
-  </div>
-</div>

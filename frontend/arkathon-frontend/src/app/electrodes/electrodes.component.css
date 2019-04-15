@@ -1,0 +1,25 @@
+.push-down {
+    margin-top: 10px;
+    height: 550px;
+    width: 660px;
+}
+
+.overlay-image {
+    top:84px;
+    left:16px;
+    position:absolute;
+    margin:0 auto;
+    width:640px;
+    height:480px;
+    opacity:0.7;
+    background-color: white;
+}
+
+.rotate-video {
+    z-index:0;
+    transform:rotateY(180deg);
+}
+
+button {
+    z-index: 100;
+}

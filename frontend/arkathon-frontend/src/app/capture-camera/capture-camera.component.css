@@ -5,3 +5,7 @@
 .mg-6 {
     margin: 6px;
 }
+
+video {
+    transform: rotateY(180deg);
+}

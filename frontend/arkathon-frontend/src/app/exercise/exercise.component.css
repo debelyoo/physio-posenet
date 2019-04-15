@@ -13,8 +13,9 @@
     top: 10px;
 }
 
-#video {
+video {
     background-color: #000000;
+    transform: rotateY(180deg);
 }
 #canvas {
     display: none;
