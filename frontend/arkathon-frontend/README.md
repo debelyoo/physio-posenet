@@ -12,7 +12,7 @@ yarn install
 ```
 ## Build 
 ```
-ng build --prod
+ng build
 ```
 
 It will populate the `dist` folder.
