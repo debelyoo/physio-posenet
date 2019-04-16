@@ -1,4 +1,7 @@
-### Original repos:
+# Physio PoseNet - backend
+The backend of the application
+
+### References
 
 * [https://github.com/rwightman/posenet-python](https://github.com/rwightman/posenet-python)
 
