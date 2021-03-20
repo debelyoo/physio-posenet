@@ -13,7 +13,7 @@ grpcio==1.19.0
 idna==2.8
 inflection==0.3.1
 itsdangerous==1.1.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 jsonschema==3.0.1
 Keras-Applications==1.0.7
 Keras-Preprocessing==1.0.9
