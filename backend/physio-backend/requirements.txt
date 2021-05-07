@@ -7,7 +7,7 @@ Click==7.0
 clickclick==1.2.2
 connexion==1.1.15
 Flask==1.0.2
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 gast==0.2.2
 grpcio==1.19.0
 idna==2.8
